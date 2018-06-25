@@ -2,3 +2,4 @@ Flask-WTF
 WTForms
 Flask-SQLAlchemy
 flask-migrate
+flask-shell-ipython

@@ -1,17 +1,6 @@
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import scoped_session, sessionmaker
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy import Column, Integer, String
+from datetime import datetime
 from app import db
 
-# engine = create_engine('sqlite:///database.db', echo=True)
-# db_session = scoped_session(sessionmaker(autocommit=False,
-#                                          autoflush=False,
-#                                          bind=engine))
-# Base = declarative_base()
-# Base.query = db_session.query_property()
-
-# Set your classes here.
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,37 +12,42 @@ class User(db.Model):
     # cv
     # projects as another table
 
+    videos = db.relationship('Video', backref='applicant', lazy='dynamic')
+
     def __repr__(self):
         return '<User {}>'.format(self.name)    
 
-'''
-class User(Base):
-    __tablename__ = 'Users'
 
+class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(30))
+    text = db.Column(db.String(140))
 
-    def __init__(self, name=None, password=None):
-        self.name = name
-        self.password = password
+    videos = db.relationship('Video', backref='question', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Question {}>'.format(self.text)
+
+class Video(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    url = db.Column(db.String(140), index=True, unique=True)
+
+    '''
+    has_audio
+    has_video
+    max_duration
+    duration
+    size
+    device_id
+    '''
+
+    def __repr__(self):
+        return '<Video {}>'.format(self.url)
+
+
 '''
-
-'''
-# Video
-video_id
-user_id
-question_id
-date
-S3_url
-has_audio
-has_video
-max_duration
-duration
-size
-device_id
-
 # Submission
 submission_id
 user_id
@@ -62,17 +56,8 @@ submission_date (end of session)
 state (0, 1, 2, 3)
 videos = array of video_id
 
-# Question
-question_id
-text
-
 # Device
 user_agent
 browser
 version%  
 '''
-
-
-# Create tables.
-# Base.metadata.create_all(bind=engine)
-
