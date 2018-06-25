@@ -11,8 +11,11 @@ DEBUG = True
 SECRET_KEY = 'my precious'
 
 # Connect to the database
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'database.db')
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    'sqlite:///' + os.path.join(BASEDIR, 'database.db')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+# Customise site
 SITE_TITLE = "1024 GERMANY"
 COMPANY = "Imagine Foundation"
 
