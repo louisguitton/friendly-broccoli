@@ -3,6 +3,7 @@ from logging import Formatter, FileHandler
 import logging
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from datetime import datetime
 
 from app.models import User
 from app import app
@@ -10,6 +11,12 @@ from app.forms import ApplyForm, LoginForm, RegistrationForm, ForgotForm
 from app import db
 import config
 
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 @app.route('/')
 def index():
@@ -64,8 +71,12 @@ def forgot():
 @app.route('/user/<username>')
 @login_required
 def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    return render_template('pages/user.html', user=user)
+    if current_user.username == username:
+        user = User.query.filter_by(username=username).first_or_404()
+        return render_template('pages/user.html', user=user)
+    else:
+        flash("Sorry, you can see only your profile.")
+        return redirect(url_for('index'))
 
 @app.route('/apply', methods=['GET', 'POST'])
 @login_required
