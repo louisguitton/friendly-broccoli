@@ -1,13 +1,26 @@
-{% extends 'layouts/form.html' %}
+{% extends 'layouts/main.html' %}
 {% block title %}Login{% endblock %}
+
 {% block content %}
-  <form method="post" class="form">
-    <h3 class="form-heading">Login <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
-    {{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}
-    {{ form.password(class_ = 'form-control last-input', placeholder = form.password.label.text, required = true) }}
-    <p class="pull-left"><a href="{{ url_for('forgot') }}">Forgot Password?</a></p>
-    <p class="pull-right"><a href="{{ url_for('register') }}">Register</a></p>
-    <input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block" disabled>
-    <p>You must add database as well as Flask-Login to enable user management. See the <a href="http://www.realpython.com">Real Python</a> course for more info!</p>
-  </form>
+<h3 class="form-heading">Sign In <a href="{{ url_for('index') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
+<form action="" method="post" novalidate class="form">
+  {{ form.hidden_tag() }}
+  <p>
+    {{ form.username.label }}<br>
+    {{ form.username(size=32, class_='form-control first-input') }}
+    {% for error in form.username.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  <p>
+    {{ form.password.label }}<br>
+    {{ form.password(size=32, class_='form-control') }}
+    {% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+  <p>{{ form.submit(class_="btn btn-lg btn-primary btn-block") }}</p>
+</form>
+<p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
 {% endblock %}
