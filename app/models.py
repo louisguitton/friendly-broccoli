@@ -25,6 +25,7 @@ class User(UserMixin, db.Model):
     # projects as another table
 
     videos = db.relationship('Video', backref='applicant', lazy='dynamic')
+    submissions = db.relationship('Submission', backref='applicant', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)    
@@ -41,11 +42,22 @@ class User(UserMixin, db.Model):
             digest, size)
 
 
+submission_questions = db.Table('submission_questions',
+    db.Column('submission_id', db.Integer, db.ForeignKey('submission.id')),
+    db.Column('question_id', db.Integer, db.ForeignKey('question.id'))
+)
+
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(140))
 
     videos = db.relationship('Video', backref='question', lazy='dynamic')
+    # Many to Many relationship between questions and submissions
+    submissions = db.relationship(
+        'Submission', secondary=submission_questions,
+        primaryjoin=(submission_questions.c.question_id == id),
+        secondaryjoin=(submission_questions.c.submission_id == id),
+        backref=db.backref('questions', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<Question {}>'.format(self.text)
@@ -54,6 +66,7 @@ class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    submission_id = db.Column(db.Integer, db.ForeignKey('submission.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     url = db.Column(db.String(140), index=True, unique=True)
 
@@ -70,20 +83,23 @@ class Video(db.Model):
         return '<Video {}>'.format(self.url)
 
 
-
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     creation_date = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     submission_date = db.Column(db.DateTime, index=True)
-    state = db.Column
+    # state = db.Column
+    videos = db.relationship('Video', backref='submission', lazy='dynamic')
+    # questions = 
 
     '''
     state (0, 1, 2, 3)
-    videos = array of video_id
     '''
     def __repr__(self):
         return '<Submission ({}, {})>'.format(self.creation_date, self.submission_date)
+
+
+
 
 '''
 # Device
