@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -22,14 +23,40 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SITE_TITLE = "1024 GERMANY"
 COMPANY = "Imagine Foundation"
 
+S3_BUCKET                 = os.environ.get("S3_BUCKET")
+S3_KEY                    = os.environ.get("S3_KEY")
+S3_SECRET                 = os.environ.get("S3_SECRET_ACCESS_KEY")
+S3_LOCATION               = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
+
+ALLOWED_EXTENSIONS = set(['webm', 'mp4'])
+
+
+
 global_data = {
-    "VIDEOS": [{
-        "question": "Why are you interested in the position?",
-        "limit": 90,
-        "required": True
-    }, {
-        "question": "What inspires you the most, and why?",
-        "limit": 120,
-        "required": True
-    }],
+    "VIDEOS": [
+        {
+            "question": "Tell me something about yourself.",
+            "limit": 30
+        }, 
+        {
+            "question": "Explain how you interact with colleagues.",
+            "limit": 30
+        }, 
+        {
+            "question": "Describe a conflict resolution situation you experienced.",
+            "limit": 30
+        }, 
+        {
+            "question": "How do you face a situation requiring skills you don’t have?",
+            "limit": 30
+        }, 
+        {
+            "question": "Do you do anything for fun?",
+            "limit": 30
+        }, 
+        {
+            "question": "Describe your working habits.",
+            "limit": 30
+        }
+    ],
 }

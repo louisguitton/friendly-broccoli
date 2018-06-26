@@ -1,8 +1,9 @@
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, send_from_directory
 from logging import Formatter, FileHandler
 import logging
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from werkzeug.utils import secure_filename
 from datetime import datetime
 
 from app.models import User
@@ -10,6 +11,7 @@ from app import app
 from app.forms import ApplyForm, LoginForm, RegistrationForm, ForgotForm
 from app import db
 import config
+from app.helpers import upload_file_to_s3
 
 
 @app.before_request
@@ -90,8 +92,70 @@ def apply():
         msg = 'Submission requested for user {}, mail={}'.format(
             form.name.data, current_user.email)
         flash(msg)
-        return redirect(url_for('index'))
+        return redirect(url_for('find_question', question_id=1))
+    # TODO: enlever l'usage de config.global_data
     return render_template('forms/apply.html', global_data=config.global_data, form=form)
+
+
+@app.route('/questions/<int:question_id>')
+def find_question(question_id):  
+    form = ApplyForm()
+    video_settings = {
+        'controls': True,
+        'width': 520,
+        'height': 240,
+        'fluid': False,
+        'plugins': {
+            'record': {
+                'audio': True,
+                'video': True,
+                'maxLength': 30,
+                'debug': True
+            }
+        }
+    }
+    # TODO: enlever l'usage de config.global_data
+    return render_template(
+        'forms/video.html', 
+        question_id=question_id, 
+        global_data=config.global_data, 
+        form=form, 
+        video_settings=video_settings
+        )
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+@app.route("/upload", methods = ['POST'])
+def upload():
+    # check if the post request has the file part
+    if 'file' not in request.files:
+        flash('No file key in request.files')
+        return redirect(request.url)
+    video = request.files['file']
+    """
+    These attributes are also available
+
+    video.filename               # The actual name of the file
+    video.content_type
+    video.content_length
+    video.mimetype
+
+    """
+        
+    # if user does not select file, browser also
+    # submit an empty part without filename
+    if video.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+
+    if video and allowed_file(video.filename):
+        video.filename = secure_filename(video.filename)
+        output   	  = upload_file_to_s3(video, app.config["S3_BUCKET"])
+        return str(output)
+    else:
+        return redirect("/")
 
 
 # Error handlers.

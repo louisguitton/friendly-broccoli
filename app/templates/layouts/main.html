@@ -32,7 +32,9 @@
   <script src="/static/js/libs/modernizr-2.8.2.min.js"></script>
   <!--[if lt IE 9]><script src="/static/js/libs/respond-1.4.2.min.js"></script><![endif]-->
   <!-- /scripts -->
-  
+
+  {% block head %}{% endblock %}
+
 </head>
 <body>
   
@@ -110,6 +112,7 @@
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
     });
   </script>
-  
+  {% block javascript %}{% endblock %}
+
 </body>
 </html>

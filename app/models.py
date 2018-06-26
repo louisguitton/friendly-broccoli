@@ -90,7 +90,6 @@ class Submission(db.Model):
     submission_date = db.Column(db.DateTime, index=True)
     # state = db.Column
     videos = db.relationship('Video', backref='submission', lazy='dynamic')
-    # questions = 
 
     '''
     state (0, 1, 2, 3)
