@@ -81,12 +81,14 @@ def user(username):
 @app.route('/apply', methods=['GET', 'POST'])
 @login_required
 def apply():
-    form = ApplyForm()
-    # if form.validate_on_submit():
-    if request.method == 'POST' and form.validate():
+    form = ApplyForm(obj=current_user)
+    if form.validate_on_submit():
+        current_user.name = form.name.data
+        current_user.location = form.location.data
+        current_user.linkedin_handle = form.linkedin_handle.data 
+        db.session.commit()
         msg = 'Submission requested for user {}, mail={}'.format(
-            form.name.data, form.email.data)
-        app.logger.info(msg)
+            form.name.data, current_user.email)
         flash(msg)
         return redirect(url_for('index'))
     return render_template('forms/apply.html', global_data=config.global_data, form=form)
@@ -95,7 +97,7 @@ def apply():
 # Error handlers.
 @app.errorhandler(500)
 def internal_error(error):
-    #db_session.rollback()
+    db.session.rollback()
     return render_template('errors/500.html'), 500
 
 

@@ -4,3 +4,4 @@ Flask-SQLAlchemy
 flask-migrate
 flask-shell-ipython
 flask-login
+python-dotenv

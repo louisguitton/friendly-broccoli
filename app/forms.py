@@ -10,7 +10,7 @@ from app.models import User
 class ApplyForm(FlaskForm):
     name = TextField('Your Name', validators=[DataRequired(), Length(min=6, max=25)])
     location = TextField('Location', validators=[DataRequired(), Length(min=6, max=40)])
-    linkedin = TextField('Linkedin', validators=[DataRequired(), Length(min=6, max=40)])
+    linkedin_handle = TextField('Linkedin', validators=[DataRequired(), Length(min=6, max=40)])
     submit = SubmitField('Submit')
     
 

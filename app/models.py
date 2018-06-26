@@ -70,15 +70,22 @@ class Video(db.Model):
         return '<Video {}>'.format(self.url)
 
 
-'''
-# Submission
-submission_id
-user_id
-creation_date (beginning of session)
-submission_date (end of session)
-state (0, 1, 2, 3)
-videos = array of video_id
 
+class Submission(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    creation_date = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    submission_date = db.Column(db.DateTime, index=True)
+    state = db.Column
+
+    '''
+    state (0, 1, 2, 3)
+    videos = array of video_id
+    '''
+    def __repr__(self):
+        return '<Submission ({}, {})>'.format(self.creation_date, self.submission_date)
+
+'''
 # Device
 user_agent
 browser
