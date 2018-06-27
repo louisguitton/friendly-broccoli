@@ -1,3 +1,9 @@
+### TO DO
+
+* replace usage of config.global_data by DB table Questions
+* after uploding the first video, go to the next one
+* when first apply, create a Submission
+* when post for question, add to Submission, don't upload directly to S3
 
 ### Quick Start
 
