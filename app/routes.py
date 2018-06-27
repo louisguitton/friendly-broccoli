@@ -8,7 +8,7 @@ from datetime import datetime
 
 from app.models import User
 from app import app
-from app.forms import ApplyForm, LoginForm, RegistrationForm, ForgotForm
+from app.forms import ApplyForm, LoginForm, RegistrationForm, ForgotForm, VideoForm
 from app import db
 import config
 from app.helpers import upload_file_to_s3
@@ -99,7 +99,7 @@ def apply():
 
 @app.route('/questions/<int:question_id>')
 def find_question(question_id):  
-    form = ApplyForm()
+    # form = VideoForm()
     video_settings = {
         'controls': True,
         'width': 520,
@@ -119,7 +119,7 @@ def find_question(question_id):
         'forms/video.html', 
         question_id=question_id, 
         global_data=config.global_data, 
-        form=form, 
+        # form=form, 
         video_settings=video_settings
         )
 

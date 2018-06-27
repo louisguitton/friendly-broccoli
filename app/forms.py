@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import TextField, PasswordField, StringField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Length, Email, ValidationError
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 from config import global_data
 from app.models import User
@@ -46,3 +47,8 @@ class ForgotForm(FlaskForm):
     email = TextField(
         'Email', validators=[DataRequired(), Length(min=6, max=40)]
     )
+
+
+class VideoForm(FlaskForm):
+    video = FileField(validators=[FileRequired()])
+    submit = SubmitField('Submit')
