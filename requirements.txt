@@ -4,5 +4,6 @@ Flask-SQLAlchemy
 flask-migrate
 flask-shell-ipython
 flask-login
+flask-bootstrap
 python-dotenv
 boto3

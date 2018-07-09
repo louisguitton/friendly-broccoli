@@ -2,6 +2,7 @@
 {% block title %}Apply{% endblock %}
 
 {% block head %}
+    {{super()}}
     <link href="{{ url_for('static', filename='node_modules/video.js/dist/video-js.min.css')}}" rel="stylesheet">
     <link href="{{ url_for('static', filename='node_modules/videojs-record/dist/css/videojs.record.css')}}" rel="stylesheet">
 
@@ -20,7 +21,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block app_content %}
 <div id="main" role="main" class="apply">
 	<div class="row">
 		<div class="col-sm-4">
