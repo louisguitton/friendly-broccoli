@@ -1,18 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import TextField, PasswordField, StringField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, EqualTo, Length, Email, ValidationError
-
-from config import global_data
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
 
-
-class ApplyForm(FlaskForm):
-    name = TextField('Your Name', validators=[DataRequired(), Length(min=6, max=25)])
-    location = TextField('Location', validators=[DataRequired(), Length(min=6, max=40)])
-    linkedin_handle = TextField('Linkedin', validators=[DataRequired(), Length(min=6, max=40)])
-    submit = SubmitField('Submit')
-    
+class LoginForm(FlaskForm):
+    username = StringField('Username', [DataRequired()])
+    password = PasswordField('Password', [DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -33,16 +29,3 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
-
-
-class LoginForm(FlaskForm):
-    username = TextField('Username', [DataRequired()])
-    password = PasswordField('Password', [DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
-
-
-class ForgotForm(FlaskForm):
-    email = TextField(
-        'Email', validators=[DataRequired(), Length(min=6, max=40)]
-    )

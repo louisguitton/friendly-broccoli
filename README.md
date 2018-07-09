@@ -1,6 +1,8 @@
 ### TO DO
 
-* after uploding the first video, go to the next one
+* better app structure: refactor with blueprints
+* deploy
+* implement forgot password and reset
 * when first apply, create a Submission
 * when post for question, add to Submission, don't upload directly to S3
 * replace usage of config.global_data by DB table Questions
