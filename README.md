@@ -6,7 +6,8 @@
 * when first apply, create a Submission
 * when post for question, add to Submission, don't upload directly to S3
 * replace usage of config.global_data by DB table Questions
-
+* add a few tests
+* translate to spanish, french, egyptian if that makes sense using [this article](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n) 
 
 ### Quick Start
 

@@ -1,12 +1,12 @@
 from datetime import datetime
-from flask import render_template, request, flash, redirect, url_for, send_from_directory
+from flask import render_template, request, flash, redirect, url_for, send_from_directory, current_app
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
 
 from app import db
 from app.main.forms import ApplyForm
 from app.models import User
-import config
+# import config
 from app.helpers import upload_file_to_s3
 from app.main import bp
 
@@ -19,7 +19,7 @@ def before_request():
 
 @bp.route('/')
 def index():
-    return render_template('home.html', config=config)
+    return render_template('home.html')
 
 @bp.route('/about')
 def about():
@@ -49,7 +49,7 @@ def apply():
         flash(msg)
         return redirect(url_for('main.find_question'))
     # TODO: enlever l'usage de config.global_data
-    return render_template('apply.html', global_data=config.global_data, form=form)
+    return render_template('apply.html', global_data=current_app.config["GLOBAL_DATA"], form=form)
 
 
 @bp.route('/questions', methods=['GET', 'POST'])
@@ -78,7 +78,7 @@ def find_question():
 
         if video and allowed_file(video.filename):
             video.filename = secure_filename(video.filename)
-            output   	  = upload_file_to_s3(video, app.config["S3_BUCKET"])
+            output = upload_file_to_s3(video, current_app.config["S3"])
             return output
         else:
             return redirect(request.url)
@@ -98,10 +98,10 @@ def find_question():
                     }
                 }
             }
-        return render_template('video.html', global_data=config.global_data, video_settings=video_settings)     
+        return render_template('video.html', global_data=current_app.config["GLOBAL_DATA"], video_settings=video_settings)     
 
 
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+           filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
