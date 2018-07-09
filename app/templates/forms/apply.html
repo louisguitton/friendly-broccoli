@@ -9,7 +9,7 @@
 			<h1>
 				Apply
 			</h1>
-			<p class="text-muted step">(step 1 of {{ global_data["VIDEOS"]|length + 1 }})</p>
+			<p class="text-muted step">(step 1 of 4)</p>
 		</div><!-- /.col -->
 		<div class="col-sm-8">
 			<div class="alert alert-success">
@@ -31,17 +31,17 @@
 			<p><i>Hint: The browser will prompt you to record using your computer's camera and microphone. Please make sure you're all set in a quiet space.</i> </p>			
 			
 			<p>
-				<b>STEP 3:</b> Submit.
+				<b>STEP 3:</b> Submit Personality Test.
 			</p>
-			
+
 			<p>
-				<i>Note: once you submit each section, you will be unable to return and edit your response in that section.</i>
+				<b>STEP 4:</b> Submit English Test.
 			</p>
 			<hr />
 			
 			<h1>Step 1: Information</h1>
 			
-			<form method="POST" action="/apply" class="form">
+			<form method="POST" class="form">
 				<input type="hidden" name="state" value="0" />
 				{{ form.hidden_tag() }}
 				<p>

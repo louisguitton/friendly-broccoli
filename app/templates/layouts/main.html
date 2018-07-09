@@ -63,7 +63,7 @@
             {% if current_user.is_anonymous %}
               <li><a href="{{ url_for('login') }}">Login</a></li>
               {% else %}
-              <li><img src="{{ current_user.avatar(32) }}"></li>
+              <li><a href="{{ url_for('user', username=current_user.username) }}"><img src="{{ current_user.avatar(32) }}"></a></li>
               <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
           </ul>
@@ -79,7 +79,7 @@
         {% if messages %}
         <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <div class="alert alert-success">{{ message }}</div>            
             {% endfor %}
         </ul>
         {% endif %}
