@@ -1,34 +1,31 @@
-import time
+from datetime import datetime
 from flask import render_template, request, flash, redirect, url_for, send_from_directory
-from logging import Formatter, FileHandler
-import logging
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
-from datetime import datetime
 
-from app.models import User
-from app import app
-from app.main.forms import ApplyForm
 from app import db
+from app.main.forms import ApplyForm
+from app.models import User
 import config
 from app.helpers import upload_file_to_s3
+from app.main import bp
 
 
-@app.before_request
+@bp.before_app_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
-@app.route('/')
+@bp.route('/')
 def index():
     return render_template('home.html', config=config)
 
-@app.route('/about')
+@bp.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/user/<username>')
+@bp.route('/user/<username>')
 @login_required
 def user(username):
     if current_user.username == username:
@@ -36,9 +33,9 @@ def user(username):
         return render_template('user.html', user=user)
     else:
         flash("Sorry, you can see only your profile.")
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
 
-@app.route('/apply', methods=['GET', 'POST'])
+@bp.route('/apply', methods=['GET', 'POST'])
 @login_required
 def apply():
     form = ApplyForm(obj=current_user)
@@ -50,12 +47,12 @@ def apply():
         msg = 'Thanks, submission requested for user {}, mail={}'.format(
             form.name.data, current_user.email)
         flash(msg)
-        return redirect(url_for('find_question'))
+        return redirect(url_for('main.find_question'))
     # TODO: enlever l'usage de config.global_data
     return render_template('apply.html', global_data=config.global_data, form=form)
 
 
-@app.route('/questions', methods=['GET', 'POST'])
+@bp.route('/questions', methods=['GET', 'POST'])
 def find_question():
     if request.method == "POST":
         # upload(request, question_id)
@@ -108,14 +105,3 @@ def find_question():
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
-
-if not app.debug:
-    file_handler = FileHandler('error.log')
-    file_handler.setFormatter(
-        Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-    )
-    app.logger.setLevel(logging.INFO)
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-    app.logger.info('errors')
