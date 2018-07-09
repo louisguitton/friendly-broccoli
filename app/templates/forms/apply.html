@@ -1,4 +1,6 @@
 {% extends 'layouts/main.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
 {% block title %}Apply{% endblock %}
 
 {% block app_content %}
@@ -41,34 +43,7 @@
 			
 			<h1>Step 1: Information</h1>
 			
-			<form method="POST" class="form">
-				<input type="hidden" name="state" value="0" />
-				{{ form.hidden_tag() }}
-				<p>
-					{{ form.name.label }}<br>
-					{{ form.name(size=32, class_='form-control first-input', placeholder=current_user.name) }}
-					{% for error in form.name.errors %}
-					<span style="color: red;">[{{ error }}]</span>
-					{% endfor %}
-				</p>
-				<p>
-					{{ form.location.label }}<br>
-					{{ form.location(size=32, class_='form-control', placeholder=current_user.location) }}
-					{% for error in form.location.errors %}
-					<span style="color: red;">[{{ error }}]</span>
-					{% endfor %}
-				</p>
-				<p>
-					{{ form.linkedin_handle.label }}<br>
-					{{ form.linkedin_handle(size=32, class_='form-control last-input', placeholder=current_user.linkedin_handle) }}
-					{% for error in form.linkedin_handle.errors %}
-					<span style="color: red;">[{{ error }}]</span>
-					{% endfor %}
-				</p>
-				
-				{{ form.submit(class_="btn btn-lg btn-primary btn-block") }}
-				
-			</form>
+			{{ wtf.quick_form(form) }}
 			
 			<p>
 				
