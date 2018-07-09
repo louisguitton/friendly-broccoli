@@ -34,5 +34,12 @@
 
 
 
-  ```
+### Deploying Application Updates
+> ssh louis@1024germany.de
+$ cd project
+$ source venv/bin/activate
+(venv) $ git pull                              
+(venv) $ sudo systemctl stop videocollect
+(venv) $ flask db upgrade                      
+(venv) $ sudo systemctl start videocollect    
 
