@@ -26,7 +26,7 @@
 
 5. Run the development server:
   ```
-  $ export FLASK_APP=1024germany.py
+  $ export FLASK_APP=videocollect.py
   $ flask run
   ```
 
