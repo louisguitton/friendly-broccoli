@@ -1,7 +1,5 @@
 ### TO DO
 
-* better app structure: refactor with blueprints
-* deploy
 * implement forgot password and reset
 * when first apply, create a Submission
 * when post for question, add to Submission, don't upload directly to S3
@@ -22,6 +20,10 @@
 3. Install the dependencies:
   ```
   $ pip install -r requirements.txt
+  ```
+  ```
+  $ cd app/static
+  $ npm install
   ```
 
 5. Run the development server:
