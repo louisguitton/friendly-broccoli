@@ -1,14 +1,17 @@
 ### TO DO
 
 * improve login
-  * implement forgot password and reset
-  * implement login with linkedin
+  * link user accounts
+  * associate application data to Auth0-authenticated users: For example, you could have a Users table that lists each user authenticated by Auth0. Every time a users logs in, you could search the table for that user. If the user does not exist, you would create a new record. If they do exist, you would update all fields, essentially keeping a local copy of all user data.
+  * [Session Management](https://auth0.com/docs/architecture-scenarios/web-app-sso/part-3): don't use Flask Login anymore and make sure you manage the session at the application level 
 * improve video storage
   * when first apply, create a Submission
   * when post for question, add to Submission, don't upload directly to S3
 * add personality test and english test to the flow and Submission
 * improve design
 * other misc
+  * get additional scopes from the linkedin API (r_fullprofile and r_network) through their partner program
+  * [Call the Linkedin API](https://auth0.com/docs/connections/calling-an-external-idp-api) with the received token to get a more complete user profile 
   * deploy using a PaaS like GCP instead of managing a Linux server (relevant for the DB mainly?) (or with Docker + Kubernetes)
   * replace usage of config.global_data by DB table Questions
   * add a few tests
