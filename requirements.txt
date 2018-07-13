@@ -10,3 +10,5 @@ boto3
 requests
 authlib
 six
+auth0-python
+python3-linkedin

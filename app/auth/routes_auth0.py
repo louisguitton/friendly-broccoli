@@ -9,6 +9,7 @@ from app import db, oauth, Config
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm
 from app.models import User
+from app.auth.auth0_management_api import get_user
 
 
 auth0 = oauth.register(
@@ -27,8 +28,7 @@ auth0 = oauth.register(
 def login():
     return auth0.authorize_redirect(
         redirect_uri=Config.AUTH0_CALLBACK_URL, 
-        # audience=Config.AUTH0_AUDIENCE
-        audience=Config.AUTH0_BASE_URL + '/api/v2/'
+        audience=Config.AUTH0_AUDIENCE
     )
 
 @bp.route('/callback')
@@ -37,26 +37,12 @@ def callback_handling():
     auth0.authorize_access_token()
     resp = auth0.get('userinfo')
     userinfo = resp.json()
-
-    resp2 = auth0.get('users', params={'id': userinfo['sub']})
-    print(resp2)
-    # userinfo2 = resp2.json()
-    # session['jwt_payload'] = resp2
-    
     # Store the user information in flask session.
     session['jwt_payload'] = userinfo
-    user = {
-        'user_id': userinfo['sub'],
-        "name": userinfo['name'],
-        "username": userinfo['nickname'],
-        "avatar": userinfo['picture'],
-        "email": userinfo['email']
-        # "location":
-        # "linkedin_handle"
-        # "password_hash"
-        # "last_seen"
-    }
-    session['user'] = user
+
+    # Get a complete user profile
+    user_id = userinfo['sub']
+    session['user'] = get_user(user_id)
     return redirect(url_for('auth.dashboard'))
 
 

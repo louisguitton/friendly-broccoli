@@ -26,12 +26,14 @@ class Config(object):
         "S3_LOCATION": 'http://{}.s3.amazonaws.com/'.format(os.environ.get("S3_BUCKET"))
     }
 
-    AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
     AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+    AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
+    AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
     AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
     AUTH0_CALLBACK_URL = os.environ.get('AUTH0_CALLBACK_URL')
-    AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
     AUTH0_AUDIENCE = AUTH0_BASE_URL + '/userinfo'
+    AUTH0_NON_INTERACTIVE_CLIENT_ID = os.environ.get('AUTH0_NON_INTERACTIVE_CLIENT_ID')
+    AUTH0_NON_INTERACTIVE_CLIENT_SECRET = os.environ.get('AUTH0_NON_INTERACTIVE_CLIENT_SECRET')
 
     ALLOWED_EXTENSIONS = set(['webm', 'mp4'])
 
