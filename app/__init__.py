@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 from authlib.flask.client import OAuth
 from config import Config
 
@@ -17,6 +18,7 @@ login.login_view = 'auth.login'
 login.login_message = 'Please log in to access this page.'
 bootstrap = Bootstrap()
 oauth = OAuth()
+moment = Moment()
 
 
 def create_app(config_class=Config):
@@ -28,6 +30,7 @@ def create_app(config_class=Config):
     login.init_app(app)
     bootstrap.init_app(app)
     oauth.init_app(app)
+    moment.init_app(app)
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

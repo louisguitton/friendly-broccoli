@@ -1,7 +1,6 @@
 ### TO DO
 
 * improve login
-  * fix the date timzeon in the user profile
   * associate application data to Auth0-authenticated users: For example, you could have a Users table that lists each user authenticated by Auth0. Every time a users logs in, you could search the table for that user. If the user does not exist, you would create a new record. If they do exist, you would update all fields, essentially keeping a local copy of all user data. [Session Management](https://auth0.com/docs/architecture-scenarios/web-app-sso/part-3): don't use Flask Login anymore 
 * improve video storage
   * when first apply, create a Submission

@@ -1,7 +1,7 @@
 from functools import wraps
 import json
 from six.moves.urllib.parse import urlencode
-
+from datetime import datetime
 from flask import render_template, redirect, url_for, flash, request, session
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
@@ -60,9 +60,13 @@ def requires_auth(f):
 @bp.route('/dashboard')
 @requires_auth
 def dashboard():
-    return render_template('auth/dashboard.html',
-                           user=session['user'],
-                           userinfo_pretty=json.dumps(session['jwt_payload'], indent=4))
+    datetime_object = datetime.strptime(session['user']['last_login'], '%Y-%m-%dT%H:%M:%S.%fZ')
+
+    return render_template(
+        'auth/dashboard.html',
+        user=session['user'],
+        last_seen=datetime_object        
+    )
 
 @bp.route('/logout')
 def logout():
