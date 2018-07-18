@@ -1,8 +1,10 @@
 ### TO DO
 
 * improve login
+  * right now can't apply because the app thinks the user is not logged in
   * associate application data to Auth0-authenticated users: For example, you could have a Users table that lists each user authenticated by Auth0. Every time a users logs in, you could search the table for that user. If the user does not exist, you would create a new record. If they do exist, you would update all fields, essentially keeping a local copy of all user data. [Session Management](https://auth0.com/docs/architecture-scenarios/web-app-sso/part-3): don't use Flask Login anymore 
 * improve video storage
+  * check that you can upload 30 seconds videos
   * when first apply, create a Submission
   * when post for question, add to Submission, don't upload directly to S3
 * add personality test and english test to the flow and Submission
@@ -42,6 +44,11 @@
 
 6. Navigate to [http://localhost:5000](http://localhost:5000)
 
+7. During development
+```
+flask db migrate -m "users table"
+flask db upgrade
+```
 
 
 ### Deploying Application Updates

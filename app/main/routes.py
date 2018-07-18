@@ -6,9 +6,9 @@ from werkzeug.utils import secure_filename
 from app import db
 from app.main.forms import ApplyForm
 from app.models import User
-# import config
 from app.helpers import upload_file_to_s3
 from app.main import bp
+# from app.auth import login_required
 
 
 @bp.before_app_request
@@ -25,15 +25,6 @@ def index():
 def about():
     return render_template('about.html')
 
-@bp.route('/user/<username>')
-@login_required
-def user(username):
-    if current_user.username == username:
-        user = User.query.filter_by(username=username).first_or_404()
-        return render_template('user.html', user=user)
-    else:
-        flash("Sorry, you can see only your profile.")
-        return redirect(url_for('main.index'))
 
 @bp.route('/apply', methods=['GET', 'POST'])
 @login_required
@@ -42,7 +33,7 @@ def apply():
     if form.validate_on_submit():
         current_user.name = form.name.data
         current_user.location = form.location.data
-        current_user.linkedin_handle = form.linkedin_handle.data 
+        current_user.linkedin_url = form.linkedin_url.data 
         db.session.commit()
         msg = 'Thanks, submission requested for user {}, mail={}'.format(
             form.name.data, current_user.email)

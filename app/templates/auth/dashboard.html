@@ -6,25 +6,25 @@
 <div class="logged-in-box auth0-box logged-in">
         <table>
                 <tr valign="top">
-                        <td><img src="{{ user['picture'] }}"></td>
+                        <td><img src="{{ user.picture }}"></td>
                         <td>
-                                <h1>User: {{ user['nickname'] }}</h1>
-                                {% if user['name'] %}
+                                <h1>User: {{ user.nickname }}</h1>
+                                {% if user.name %}
                                 <p>
-                                        {{ user['name'] }}
-                                        {% if user['location'] %}
-                                        from {{ user['location']['name']}}
+                                        {{ user.name }}
+                                        {% if user.location %}
+                                        from {{ user.location }}
                                         {% endif %}
                                 </p>
                                 {% endif %}
                                 
-                                {% if user['publicProfileUrl'] %}<a href="{{ user['publicProfileUrl'] }}" target='blank'>Linkedin</a>{% endif %}
-                                {% if user['last_login'] %}<p>Last seen on: {{ moment(last_seen).fromNow() }}</p>{% endif %}
+                                {% if user.linkedin_url %}<a href="{{ user.linkedin_url }}" target='blank'>Linkedin</a>{% endif %}
+                                {% if user.last_login %}<p>Last seen on: {{ moment(user.last_login).fromNow() }}</p>{% endif %}
                                 
-                                {% if user['headline'] or user['summary'] %}
+                                {% if user.headline or user.summary %}
                                 <hr>
-                                {% if user['headline'] %}<p>{{ user['headline'] }}</p>{% endif %}
-                                {% if user['summary'] %}<p>{{ user['summary'] }}</p>{% endif %}
+                                {% if user.headline %}<p>{{ user.headline }}</p>{% endif %}
+                                {% if user.summary %}<p>{{ user.summary }}</p>{% endif %}
                                 {% endif %}
                         </td>
                 </tr>

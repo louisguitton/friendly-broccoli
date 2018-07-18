@@ -50,7 +50,7 @@
                 {% if current_user.is_anonymous %}
                 <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                 {% else %}
-                <li><a href="{{ url_for('main.user', username=current_user.username) }}"><img src="{{ current_user.avatar(32) }}"></a></li>
+                <li><a href="{{ url_for('auth.dashboard') }}"><img src="{{ current_user.picture }}"></a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% endif %}
             </ul>

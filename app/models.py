@@ -14,32 +14,24 @@ def load_user(id):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    auth0_id = db.Column(db.Integer, index=True, unique=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     name = db.Column(db.String(120), index=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    nickname = db.Column(db.String(120), index=True)
     email = db.Column(db.String(120), index=True, unique=True)
     location = db.Column(db.String(120), index=True)
-    linkedin_handle = db.Column(db.String(64), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
-    # cv
-    # projects as another table
+    linkedin_url = db.Column(db.String(64), index=True, unique=True)
+    last_login = db.Column(db.DateTime, default=datetime.utcnow)
+    picture = db.Column(db.String(128))
+    headline = db.Column(db.Text())
+    industry = db.Column(db.Text())
+    summary = db.Column(db.Text())
 
     videos = db.relationship('Video', backref='applicant', lazy='dynamic')
     submissions = db.relationship('Submission', backref='applicant', lazy='dynamic')
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)    
-    
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-    
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-            digest, size)
+        return '<User {}>'.format(self.linkedin_url)    
 
 
 submission_questions = db.Table('submission_questions',
