@@ -8,6 +8,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from authlib.flask.client import OAuth
+from flask_admin import Admin
 from config import Config
 
 
@@ -31,6 +32,7 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     oauth.init_app(app)
     moment.init_app(app)
+    admin = Admin(app, name='videocollect', template_mode='bootstrap3')
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
@@ -40,6 +42,9 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+
+    from app.admin import init_admin
+    init_admin(admin)
 
     if not app.debug and not app.testing:
         if not os.path.exists('logs'):

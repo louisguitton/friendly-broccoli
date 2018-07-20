@@ -7,6 +7,7 @@
 * add personality test and english test to the flow and Submission
 * improve design
 * other misc
+  * add admin dashboard to see users [see here](https://www.reddit.com/r/flask/comments/7tr82o/example_integrating_flask_admin_into_flask_webapp/)
   * get additional scopes from the linkedin API (r_fullprofile and r_network) through their partner program
   * [Call the Linkedin API](https://auth0.com/docs/connections/calling-an-external-idp-api) with the received token to get a more complete user profile 
   * deploy using a PaaS like GCP instead of managing a Linux server (relevant for the DB mainly?) (or with Docker + Kubernetes)
