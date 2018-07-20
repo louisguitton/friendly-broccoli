@@ -24,11 +24,11 @@ a {
 }
 
 a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-  color: #aec251;
+    color: #aec251;
 }
 
 a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
-  color: #687430;
+    color: #687430;
 }
 
 footer {
@@ -72,8 +72,8 @@ p.copyright {
 }
 
 .footer, .push {
-  clear: both;
-  height: 4em;
+    clear: both;
+    height: 4em;
 }
 
 .intro-divider {
@@ -118,20 +118,67 @@ p.copyright {
 }
 
 .wrapper {
-  min-height: 75%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -4em;
-  padding: 0 0 4em;
+    min-height: 75%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+    padding: 0 0 4em;
 }
 
 .error {
     background-color: #FFDDDD;
     color: red;
-  }
-  .error-desc {
+}
+.error-desc {
     display: none;
-  }
-  .error .error-desc {
+}
+.error .error-desc {
     display: inherit;
-  }
+}
+
+img.avatar {
+    object-fit: cover;
+    border-radius:50%;
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.btn-primary {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 24px;
+    border: 1px solid #687430;
+    border-radius: 29px;
+    background: #aec251;
+    background: -webkit-gradient(linear, left top, left bottom, from(#aec251), to(#687430));
+    background: -moz-linear-gradient(top, #aec251, #687430);
+    background: linear-gradient(to bottom, #aec251, #687430);
+    -webkit-box-shadow: #000000 0px 0px 8px 0px;
+    -moz-box-shadow: #000000 0px 0px 8px 0px;
+    box-shadow: #000000 0px 0px 8px 0px;
+    text-shadow: #687430 1px 1px 1px;
+    font: normal normal bold 20px arial;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase
+}
+.btn-primary:hover {
+    background: #aec251;
+    background: -webkit-gradient(linear, left top, left bottom, from(#aec251), to(#e6ecca));
+    background: -moz-linear-gradient(top, #aec251, #e6ecca);
+    background: linear-gradient(to bottom, #aec251, #e6ecca);
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase
+}
+.btn-primary:active {
+    background: #687430;
+    background: -webkit-gradient(linear, left top, left bottom, from(#687430), to(#687430));
+    background: -moz-linear-gradient(top, #687430, #687430);
+    background: linear-gradient(to bottom, #687430, #687430);
+    text-transform: uppercase
+}
+.btn-primaryn:focus {
+    text-transform: uppercase
+}
