@@ -4,52 +4,55 @@
 {% block title %}Apply{% endblock %}
 
 {% block app_content %}
-<div id="main" role="main" class="apply">
-	
-	<div class="row">
-		<div class="col-sm-4">
-			<h1>
-				Apply
-			</h1>
-			<p class="text-muted step">(step 1 of 4)</p>
-		</div><!-- /.col -->
-		<div class="col-sm-8">
-			<div class="alert alert-success">
-				<b>Hi, {{ current_user.name }}!<br> </b>
-			</div>
-			
-			<p>
-				<b>STEP 1:</b> Fill out the form below.
-			</p>
-			<p>
-				<b>STEP 2:</b> Record short video response{{ '' if global_data["VIDEOS"]|length == 1 else 's' }} on the following page{{ '' if global_data["VIDEOS"]|length == 1 else 's' }}:
-			</p>
-			<ul>
-				{% for video in global_data["VIDEOS"] %}
-				<li><b>"{{ video["question"] }}"</b> <br /><span class="text-muted">(up to a {{ video["limit"] }}-second response)</span>
-				</li>
-				{% endfor %}
-			</ul>
-			<p><i>Hint: The browser will prompt you to record using your computer's camera and microphone. Please make sure you're all set in a quiet space.</i> </p>			
-			
-			<p>
-				<b>STEP 3:</b> Submit Personality Test.
-			</p>
-
-			<p>
-				<b>STEP 4:</b> Submit English Test.
-			</p>
-			<hr />
-			
-			<h1>Step 1: Information</h1>
-			
-			{{ wtf.quick_form(form) }}
-			
-			<p>
-				
+<div class="container">
+	<div class="content-section apply">
+		
+		<div class="row">
+			<div class="col-sm-4">
+				<h1>
+					Apply
+				</h1>
+				<p class="text-muted step">(step 1 of 4)</p>
 			</div><!-- /.col -->
-		</div><!-- /.row -->
+			<div class="col-sm-8">
+				<div class="alert alert-success">
+					<b>Hi, {{ current_user.name }}!<br> </b>
+				</div>
+				
+				<p>
+					<b>STEP 1:</b> Fill out the form below.
+				</p>
+				<p>
+					<b>STEP 2:</b> Record short video response{{ '' if global_data["VIDEOS"]|length == 1 else 's' }} on the following page{{ '' if global_data["VIDEOS"]|length == 1 else 's' }}:
+				</p>
+				<ul>
+					{% for video in global_data["VIDEOS"] %}
+					<li><b>"{{ video["question"] }}"</b> <br /><span class="text-muted">(up to a {{ video["limit"] }}-second response)</span>
+					</li>
+					{% endfor %}
+				</ul>
+				<p><i>Hint: The browser will prompt you to record using your computer's camera and microphone. Please make sure you're all set in a quiet space.</i> </p>			
+				
+				<p>
+					<b>STEP 3:</b> Submit Personality Test.
+				</p>
+				
+				<p>
+					<b>STEP 4:</b> Submit English Test.
+				</p>
+				<hr />
+				
+				<h1>Step 1: Information</h1>
+				
+				{{ wtf.quick_form(form) }}
+				
+				<p>
+					
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div>
+		
 	</div>
-{% endblock %}
+	{% endblock %}
 	
 	

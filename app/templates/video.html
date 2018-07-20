@@ -2,141 +2,143 @@
 {% block title %}Apply{% endblock %}
 
 {% block head %}
-    {{super()}}
-    <link href="{{ url_for('static', filename='node_modules/video.js/dist/video-js.min.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='node_modules/videojs-record/dist/css/videojs.record.css')}}" rel="stylesheet">
+{{super()}}
+<link href="{{ url_for('static', filename='node_modules/video.js/dist/video-js.min.css')}}" rel="stylesheet">
+<link href="{{ url_for('static', filename='node_modules/videojs-record/dist/css/videojs.record.css')}}" rel="stylesheet">
 
-    <script src="{{ url_for('static', filename='node_modules/video.js/dist/video.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/recordrtc/RecordRTC.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/webrtc-adapter/out/adapter.js')}}"></script>
+<script src="{{ url_for('static', filename='node_modules/video.js/dist/video.min.js')}}"></script>
+<script src="{{ url_for('static', filename='node_modules/recordrtc/RecordRTC.js')}}"></script>
+<script src="{{ url_for('static', filename='node_modules/webrtc-adapter/out/adapter.js')}}"></script>
 
-    <script src="{{ url_for('static', filename='node_modules/videojs-record/dist/videojs.record.js')}}"></script>
+<script src="{{ url_for('static', filename='node_modules/videojs-record/dist/videojs.record.js')}}"></script>
 
-    <style>
+<style>
     /* change player background color */
     #myVideo {
         background-color: #9ab87a;
     }
-    </style>
+</style>
 {% endblock %}
 
 
 {% block app_content %}
-<div id="main" role="main" class="apply">
-	<div class="row">
-		<div class="col-sm-4">
-			<h1>
-				Apply
-			</h1>
-			<p class="text-muted step">(step 2 of 4)</p>
-		</div><!-- /.col -->
-		<div class="col-sm-8">
-			<div id="intro" >
-
-				<p>Next, we'd like to ask you
-                    {{ 'a question' if global_data["VIDEOS"]|length == 1 else 'some questions' }},
-				   which you can respond to using the embedded video recorder.
-                   The {{ 'question is' if global_data["VIDEOS"]|length == 1 else 'questions are' }}:</p>
-				<ol>
-				{% for video in global_data["VIDEOS"] %}
-					<li><b>{{ video["question"] }}</b>
-                    </li>
+<div class="container">
+    <div class="content-section apply">
+        <div class="row">
+            <div class="col-sm-4">
+                <h1>
+                    Apply
+                </h1>
+                <p class="text-muted step">(step 2 of 4)</p>
+            </div><!-- /.col -->
+            <div class="col-sm-8">
+                <div id="intro" >
                     
-                    <div id="apply-form-container" >
-                        <div class="well interview-question">
-                            <h2>{{ video["question"] }}</h2>
-                            <p class="text-muted" style="font-size: 1.2em">(up to {{ video["limit"] }} seconds)</p>
-                        </div>
-                        
-                        <video id="myVideo-{{loop.index}}" class="video-js vjs-default-skin"></video>
-
-                        <script>
-                            var video_settings_js = {{ video_settings|tojson }};
-                            var player = videojs("myVideo-{{loop.index}}", video_settings_js, function onPlayerReady(){
-                                // print version information at startup
-                                var msg = 'Using video.js ' + videojs.VERSION +
-                                    ' with videojs-record ' + videojs.getPluginVersion('record') +
-                                    ' and recordrtc ' + RecordRTC.version;
-                                videojs.log(msg);
-                            });
-            
-                            // error handling
-                            player.on('deviceError', function() {
-                                console.log('device error:', player.deviceErrorCode);
-                            });
-                            player.on('error', function(error) {
-                                console.log('error:', error);
-                            });
+                    <p>Next, we'd like to ask you
+                        {{ 'a question' if global_data["VIDEOS"]|length == 1 else 'some questions' }},
+                        which you can respond to using the embedded video recorder.
+                        The {{ 'question is' if global_data["VIDEOS"]|length == 1 else 'questions are' }}:</p>
+                        <ol>
+                            {% for video in global_data["VIDEOS"] %}
+                            <li><b>{{ video["question"] }}</b>
+                            </li>
                             
-                            // user clicked the record button and started recording
-                            player.on('startRecord', function() {
-                                console.log('started recording!');
-                            });
-                            
-                            // user completed recording and stream is available
-                            player.on('finishRecord', function() {
-                                // the blob object contains the recorded data that
-                                // can be downloaded by the user, stored on server etc.
-                                console.log('finished recording: ', player.recordedData);
-                
-                                var data = this.recordedData;
-                                if (this.recordedData.video) {
-                                    // for chrome for audio+video
-                                    data = this.recordedData.video;
-                                }
-            
-                                $('#superwarn').show();
-                                $("#submit-{{loop.index}}").show();
-            
-                                var serverUrl = '/questions'
+                            <div id="apply-form-container" >
+                                <div class="well interview-question">
+                                    <h2>{{ video["question"] }}</h2>
+                                    <p class="text-muted" style="font-size: 1.2em">(up to {{ video["limit"] }} seconds)</p>
+                                </div>
                                 
-                                document.getElementById("submit-{{loop.index}}").addEventListener("click", async function(ev) {
-                                    var formData = new FormData();
-                                    formData.append('file', data, data.name);
-            
-                                    console.log('uploading recording:', data.name);
+                                <video id="myVideo-{{loop.index}}" class="video-js vjs-default-skin"></video>
+                                
+                                <script>
+                                    var video_settings_js = {{ video_settings|tojson }};
+                                    var player = videojs("myVideo-{{loop.index}}", video_settings_js, function onPlayerReady(){
+                                        // print version information at startup
+                                        var msg = 'Using video.js ' + videojs.VERSION +
+                                        ' with videojs-record ' + videojs.getPluginVersion('record') +
+                                        ' and recordrtc ' + RecordRTC.version;
+                                        videojs.log(msg);
+                                    });
                                     
-                                    fetch(serverUrl, {
-                                        method: 'POST',
-                                        body: formData
-                                    }).then(
-                                        success => console.log('recording upload complete.')
-                                    ).catch(
-                                        error => console.error('an upload error occurred!')
-                                    );
-            
-                                }, false);
-                            });
-                        </script>
+                                    // error handling
+                                    player.on('deviceError', function() {
+                                        console.log('device error:', player.deviceErrorCode);
+                                    });
+                                    player.on('error', function(error) {
+                                        console.log('error:', error);
+                                    });
+                                    
+                                    // user clicked the record button and started recording
+                                    player.on('startRecord', function() {
+                                        console.log('started recording!');
+                                    });
+                                    
+                                    // user completed recording and stream is available
+                                    player.on('finishRecord', function() {
+                                        // the blob object contains the recorded data that
+                                        // can be downloaded by the user, stored on server etc.
+                                        console.log('finished recording: ', player.recordedData);
+                                        
+                                        var data = this.recordedData;
+                                        if (this.recordedData.video) {
+                                            // for chrome for audio+video
+                                            data = this.recordedData.video;
+                                        }
+                                        
+                                        $('#superwarn').show();
+                                        $("#submit-{{loop.index}}").show();
+                                        
+                                        var serverUrl = '/questions'
+                                        
+                                        document.getElementById("submit-{{loop.index}}").addEventListener("click", async function(ev) {
+                                            var formData = new FormData();
+                                            formData.append('file', data, data.name);
+                                            
+                                            console.log('uploading recording:', data.name);
+                                            
+                                            fetch(serverUrl, {
+                                                method: 'POST',
+                                                body: formData
+                                            }).then(
+                                            success => console.log('recording upload complete.')
+                                            ).catch(
+                                            error => console.error('an upload error occurred!')
+                                            );
+                                            
+                                        }, false);
+                                    });
+                                </script>
+                                
+                                <div class="alert alert-info" id="superwarn" style="display:none;">
+                                    <b>Great!</b> Note: once you hit "continue" you will not be able to come back to this question.
+                                </div>                
+                                <button id="submit-{{loop.index}}" type="button" class="btn btn-large btn-primary pull-right" style="display:none">
+                                    Submit
+                                </button>  
+                            </div><!-- /.apply-form-container -->
+                            {% endfor %}
+                        </ol>
                         
-                        <div class="alert alert-info" id="superwarn" style="display:none;">
-                            <b>Great!</b> Note: once you hit "continue" you will not be able to come back to this question.
-                        </div>                
-                        <button id="submit-{{loop.index}}" type="button" class="btn btn-large btn-primary pull-right" style="display:none">
-                            Submit
-                        </button>  
-                </div><!-- /.apply-form-container -->
-				{% endfor %}
-				</ol>
-
-			</div><!-- /#intro -->
- 
-			
-		</div>
-		
-	</div><!-- /.row -->
-</div>
-{% endblock %}
-
-
-{% block javascript %}
-<script>
-$(document).ready(function () {
-	$('#lets-go').click(function(e) {
-		e.preventDefault();
-		$('#apply-form-container').slideDown();
-		$('#intro').slideUp();
-	});	
-});
-</script>
-{% endblock %}
+                    </div><!-- /#intro -->
+                    
+                    
+                </div>
+                
+            </div><!-- /.row -->
+        </div>
+    </div>
+    {% endblock %}
+    
+    
+    {% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $('#lets-go').click(function(e) {
+                e.preventDefault();
+                $('#apply-form-container').slideDown();
+                $('#intro').slideUp();
+            });	
+        });
+    </script>
+    {% endblock %}
