@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-    op.add_column('user', sa.Column('auth0_id', sa.Integer(), nullable=True))
+    op.add_column('user', sa.Column('auth0_id', sa.String(length=64), nullable=True))
     op.create_index(op.f('ix_user_auth0_id'), 'user', ['auth0_id'], unique=True)
     op.add_column('user', sa.Column('headline', sa.Text(), nullable=True))
     op.add_column('user', sa.Column('industry', sa.Text(), nullable=True))
@@ -32,7 +32,8 @@ def upgrade():
         bop.alter_column('username', new_column_name='nickname')
         bop.alter_column('linkedin_handle', new_column_name='linkedin_url')
         bop.alter_column('last_seen', new_column_name='last_login')
-        bop.alter_column('password_hash', new_column_name='picture')
+        bop.drop_column('password_hash')
+        bop.add_column(sa.Column('picture', sa.Text(), nullable=True))
     op.create_index(op.f('ix_user_linkedin_url'), 'user', ['linkedin_url'], unique=True)
     op.create_index(op.f('ix_user_nickname'), 'user', ['nickname'], unique=True)
 
@@ -51,7 +52,8 @@ def downgrade():
         bop.alter_column( 'nickname', new_column_name='username')
         bop.alter_column( 'linkedin_url', new_column_name='linkedin_handle')
         bop.alter_column( 'last_login', new_column_name='last_seen')
-        bop.alter_column( 'picture', new_column_name='password_hash')
+        bop.drop_column('picture')
+        bop.add_column(sa.Column('password_hash', sa.String(length=128), nullable=True))
     op.create_index(op.f('ix_user_linkedin_handle'), 'user', ['linkedin_handle'], unique=True)
     op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
 
