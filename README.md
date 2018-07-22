@@ -1,16 +1,21 @@
 ### TO DO
 
 * improve video storage
-  * check that you can upload 30 seconds videos
+  * add admin for users
+  * populate questions table
+  * add admin for questions
+  * control video uploads from questions table
+  * add video table
   * when first apply, create a Submission
   * when post for question, add to Submission, don't upload directly to S3
+  * use celery for background jobs, architecture is decribed for Ruby here https://twin.github.io/file-uploads-asynchronous-world/
 * add personality test and english test to the flow and Submission
-* improve design
 * other misc
-  * get additional scopes from the linkedin API (r_fullprofile and r_network) through their partner program
+  * do a proper json API (maybe using Marshmallow) so that later the frontend can be done in React
   * [Call the Linkedin API](https://auth0.com/docs/connections/calling-an-external-idp-api) with the received token to get a more complete user profile 
   * deploy using a PaaS like GCP instead of managing a Linux server (relevant for the DB mainly?) (or with Docker + Kubernetes)
   * replace usage of config.global_data by DB table Questions
+  * get additional scopes from the linkedin API (r_fullprofile and r_network) through their partner program
   * add a few tests
   * translate to spanish, french, egyptian if that makes sense using [this article](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n) 
 
