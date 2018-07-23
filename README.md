@@ -1,10 +1,7 @@
 ### TO DO
 
 * improve video storage
-  * flask-login has-role admin
-  * add admin dashboard to see users [see here](https://www.reddit.com/r/flask/comments/7tr82o/example_integrating_flask_admin_into_flask_webapp/)
-  * populate questions table
-  * add admin for questions
+  * make admin dashboard beautiful [see here](https://www.reddit.com/r/flask/comments/7tr82o/example_integrating_flask_admin_into_flask_webapp/)
   * control video uploads from questions table
   * add video table
   * when first apply, create a Submission

@@ -19,6 +19,8 @@ class Config(object):
         'sqlite:///' + os.path.join(BASEDIR, 'database.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    ADMINS = ['louisguitton93@gmail.com']
+
     S3 = {
         "S3_BUCKET": os.environ.get("S3_BUCKET"),
         "S3_KEY": os.environ.get("S3_KEY"),

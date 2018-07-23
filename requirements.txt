@@ -14,3 +14,4 @@ six
 auth0-python
 python3-linkedin
 flask-admin
+flask-principal

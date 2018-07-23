@@ -2,10 +2,11 @@ from functools import wraps
 import json
 from six.moves.urllib.parse import urlencode
 from datetime import datetime
-from flask import render_template, redirect, url_for, flash, request, session, current_app
+from flask import render_template, redirect, url_for, flash, request, session, current_app, g
 from werkzeug.urls import url_parse
 from werkzeug.local import LocalProxy
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_principal import identity_changed, Identity, AnonymousIdentity
 from app import db, oauth, Config
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm
@@ -98,6 +99,9 @@ def callback_handling():
     db.session.commit()
 
     login_user(user)
+
+    # Tell Flask-Principal the identity changed
+    identity_changed.send(current_app._get_current_object(), identity=Identity(user.email))
     
     next_page = None
     if 'next' in session:
@@ -120,6 +124,10 @@ def logout():
     # Clear session stored data
     logout_user()
     session.clear()
+
+    # Tell Flask-Principal the user is anonymous
+    identity_changed.send(current_app._get_current_object(), identity=AnonymousIdentity())
+
     # Redirect user to logout endpoint
     params = {'returnTo': url_for('main.index', _external=True), 'client_id': Config.AUTH0_CLIENT_ID}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
