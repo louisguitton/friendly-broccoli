@@ -8,7 +8,6 @@ from app.main.forms import ApplyForm
 from app.models import User
 from app.helpers import upload_file_to_s3
 from app.main import bp
-# from app.auth import login_required
 
 
 @bp.before_app_request

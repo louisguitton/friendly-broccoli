@@ -45,14 +45,14 @@ def register(user_json):
         name=user_json['name'],
         nickname=user_json['nickname'], 
         email=user_json['email'],
-        location=user_json['location']['name'],
         linkedin_url=user_json['publicProfileUrl'],
         last_login=datetime.strptime(user_json['last_login'], '%Y-%m-%dT%H:%M:%S.%fZ'),
-        picture=user_json['picture'],
-        headline=user_json['headline'],
-        industry=user_json['industry'],
-        summary=user_json['summary']
     )
+    for col in ['picture', 'headline', 'industry', 'summary']:
+        if col in user_json:
+            setattr(user, col, user_json[col])
+    if 'location' in user_json:
+        user.location = user_json['location']['name']
     
     flash('Congratulations, you are now a registered user!')
     return user
@@ -85,13 +85,15 @@ def callback_handling():
         user.name=user_full_profile['name']
         user.nickname=user_full_profile['nickname']
         user.email=user_full_profile['email']
-        user.location=user_full_profile['location']['name']
         user.linkedin_url=user_full_profile['publicProfileUrl']
         user.last_login=datetime.strptime(user_full_profile['last_login'], '%Y-%m-%dT%H:%M:%S.%fZ')
-        user.picture=user_full_profile['picture']
-        user.headline=user_full_profile['headline']
-        user.industry=user_full_profile['industry']
-        user.summary=user_full_profile['summary']
+
+        for col in ['picture', 'headline', 'industry', 'summary']:
+            if col in user_full_profile:
+                setattr(user, col, user_full_profile[col])
+        if 'location' in user_full_profile:
+            user.location = user_full_profile['location']['name']
+
     db.session.add(user)
     db.session.commit()
 
