@@ -93,7 +93,7 @@ lang="en"
             <li class="list-inline-item"><a href="{{ url_for('main.index') }}">Home</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.apply') }}">Apply</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.about') }}">About</a></li>
-            {% if not current_user.is_anonymous %}
+            {% if g.identity.provides %}
             <li class="list-inline-item"><a href="{{ url_for('admin.index') }}">Admin</a></li>
             {% endif %}
             <li class="footer-menu-divider list-inline-item">⋅</li>
