@@ -69,6 +69,8 @@
 
 
 {% block content %}
+{{ utils.flashed_messages() }}
+
 <div class="wrapper">
     {# application content needs to be provided in the app_content block #}
     {% block app_content %}{% endblock %}

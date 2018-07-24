@@ -1,6 +1,8 @@
 ### TO DO
 
 * improve video storage
+  * improve front end for videos
+  * check S3 signed URL
   * control video uploads from questions table
   * add video table
   * when first apply, create a Submission

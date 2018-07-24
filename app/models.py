@@ -40,6 +40,8 @@ submission_questions = db.Table('submission_questions',
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(140))
+    length_in_sec = db.Column(db.Integer, default=30)
+    order_pos = db.Column(db.Integer, unique=True)
 
     videos = db.relationship('Video', backref='question', lazy='dynamic')
     # Many to Many relationship between questions and submissions

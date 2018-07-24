@@ -8,6 +8,7 @@ from app.main.forms import ApplyForm
 from app.models import User
 from app.helpers import upload_file_to_s3
 from app.main import bp
+from app.models import Question
 
 
 @bp.before_app_request
@@ -38,8 +39,9 @@ def apply():
             form.name.data, current_user.email)
         flash(msg)
         return redirect(url_for('main.find_question'))
-    # TODO: enlever l'usage de config.global_data
-    return render_template('apply.html', global_data=current_app.config["GLOBAL_DATA"], form=form)
+
+    questions = Question.query.order_by("order_pos asc").all()
+    return render_template('apply.html', questions=questions, form=form)
 
 
 @bp.route('/questions', methods=['GET', 'POST'])
@@ -73,10 +75,9 @@ def find_question():
         else:
             return redirect(request.url)
     else:
-        # TODO: enlever l'usage de config.global_data
         video_settings = {
                 'controls': True,
-                'width': 520,
+                'width': 320,
                 'height': 240,
                 'fluid': False,
                 'plugins': {
@@ -88,7 +89,8 @@ def find_question():
                     }
                 }
             }
-        return render_template('video.html', global_data=current_app.config["GLOBAL_DATA"], video_settings=video_settings)     
+        questions = Question.query.order_by("order_pos asc").all()
+        return render_template('video.html', questions=questions, video_settings=video_settings)     
 
 
 

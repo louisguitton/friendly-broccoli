@@ -38,32 +38,3 @@ class Config(object):
     AUTH0_NON_INTERACTIVE_CLIENT_SECRET = os.environ.get('AUTH0_NON_INTERACTIVE_CLIENT_SECRET')
 
     ALLOWED_EXTENSIONS = set(['webm', 'mp4'])
-
-    GLOBAL_DATA = {
-        "VIDEOS": [
-            {
-                "question": "Tell me something about yourself.",
-                "limit": 30
-            }, 
-            {
-                "question": "Explain how you interact with colleagues.",
-                "limit": 30
-            }, 
-            {
-                "question": "Describe a conflict resolution situation you experienced.",
-                "limit": 30
-            }, 
-            {
-                "question": "How do you face a situation requiring skills you don’t have?",
-                "limit": 30
-            }, 
-            {
-                "question": "Do you do anything for fun?",
-                "limit": 30
-            }, 
-            {
-                "question": "Describe your working habits.",
-                "limit": 30
-            }
-        ],
-    }
