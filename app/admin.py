@@ -9,7 +9,15 @@ admin_role = RoleNeed('admin')
 admin_permission = Permission(admin_role)
 
 
-class MyModelView(ModelView):
+class CustomIndexView(AdminIndexView):
+    @admin_permission.require()
+    def is_accessible(self):
+        return True
+
+class CustomView(ModelView):
+    list_template = 'admin/list.html'
+    create_template = 'admin/create.html'
+    edit_template = 'admin/edit.html'
 
     @admin_permission.require()
     def is_accessible(self):
@@ -19,20 +27,17 @@ class MyModelView(ModelView):
         # redirect to login page if user doesn't have access
         return redirect(url_for('auth.login', next=request.url))
 
-
-class MyAdminIndexView(AdminIndexView):
-    
-    @admin_permission.require()
-    def is_accessible(self):
-        return True
+class UserAdmin(CustomView):
+    column_searchable_list = ('name', 'email')
+    column_filters = ('location', 'industry')
 
 
 def init_admin(f_admin):
     from app import db
     from app.models import User, Question
 
-    f_admin.add_view(MyModelView(User, db.session))
-    f_admin.add_view(MyModelView(Question, db.session))
+    f_admin.add_view(UserAdmin(User, db.session))
+    f_admin.add_view(CustomView(Question, db.session))
 
 
 def register_principal_identity_signal(app):

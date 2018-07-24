@@ -1,0 +1,11 @@
+{% extends 'admin/model/edit.html' %}
+
+
+{% block body %}
+    <h2 id="brand">{{ admin_view.name|capitalize }} Edit</h2>
+    <div class="clearfix"></div>
+    <hr>
+    {% block edit_form %}
+        {{ super() }}
+    {% endblock %}
+{% endblock %}

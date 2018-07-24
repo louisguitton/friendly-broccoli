@@ -1,0 +1,11 @@
+{% extends 'admin/model/create.html' %}
+
+{% block body %}
+    <h2 id="brand">{{ admin_view.name|capitalize }} Create</h2>
+    <div class="clearfix"></div>
+    <hr>
+
+    {% block create_form %}
+        {{ super() }}
+    {% endblock %}
+{% endblock %}

@@ -5,6 +5,14 @@
 {% if title %}{{ title }} | 1024 Germany{% else %}Welcome to 1024 Germany{% endif %}
 {% endblock %}
 
+{% block metas %}
+<meta charset="UTF-8">
+<meta name="description" content="Interview Training">
+<meta name="keywords" content="HR,Interview,Video,Personality,Research">
+<meta name="author" content="Louis Guitton">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock metas %}
+
 {% block head %}
 {{super()}}
 
