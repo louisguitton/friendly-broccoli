@@ -77,15 +77,13 @@ def find_question():
     else:
         video_settings = {
                 'controls': True,
-                'width': 320,
-                'height': 240,
-                'fluid': False,
+                'fluid': True,
                 'plugins': {
                     'record': {
                         'audio': True,
                         'video': True,
                         'maxLength': 30,
-                        'debug': True
+                        'debug': False
                     }
                 }
             }
