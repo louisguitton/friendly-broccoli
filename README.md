@@ -1,14 +1,10 @@
 ### TO DO
 
 * improve video storage
-  * improve front end for videos
-  * fix admin panel for bootstrp 4
-  * check S3 signed URL
-  * control video uploads from questions table
-  * add video table
-  * when first apply, create a Submission
-  * when post for question, add to Submission, don't upload directly to S3
-  * use celery for background jobs, architecture is decribed for Ruby here https://twin.github.io/file-uploads-asynchronous-world/
+  * when upload video, create row in Videos
+  * when first apply, create a Submission; when post for question, add to Submission
+  * Upload client-to-S3 directcly with pre-signed URL instead of client-to-server-to-S3
+  * use celery for background jobs, architecture is decribed for Ruby [here](https://twin.github.io/file-uploads-asynchronous-world/)
 * add personality test and english test to the flow and Submission
 * other misc
   * do a proper json API (maybe using Marshmallow) so that later the frontend can be done in React
@@ -17,6 +13,7 @@
   * get additional scopes from the linkedin API (r_fullprofile and r_network) through their partner program
   * add a few tests
   * translate to spanish, french, egyptian if that makes sense using [this article](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n) 
+  * refactor CSS with SASS
 
 ### Quick Start
 
