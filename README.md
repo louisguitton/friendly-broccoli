@@ -3,9 +3,9 @@
 * improve video storage
   * when upload video, create row in Videos
   * when first apply, create a Submission; when post for question, add to Submission
-  * Upload client-to-S3 directcly with pre-signed URL instead of client-to-server-to-S3
-    * check [this](https://github.com/heryandi/flask-s3/blob/master/templates/index.html)
   * use celery for background jobs, architecture is decribed for Ruby [here](https://twin.github.io/file-uploads-asynchronous-world/)
+  * progress bar for video upload [here](https://github.com/heryandi/flask-s3/blob/master/templates/index.html)
+  * tweak celery hello world to be useful
 * add personality test and english test to the flow and Submission
 * other misc
   * do a proper json API (maybe using Marshmallow) so that later the frontend can be done in React
@@ -61,4 +61,15 @@ $ source venv/bin/activate
 (venv) $ sudo systemctl stop videocollect
 (venv) $ flask db upgrade                      
 (venv) $ sudo systemctl start videocollect    
+```
+
+To start celery
+```bash
+→ redis-server
+```
+```bash
+→ celery worker -A videocollect.celery --loglevel=info
+```
+```bash
+→ celery beat -A videocollect.celery --loglevel=info
 ```

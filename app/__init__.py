@@ -12,6 +12,8 @@ from authlib.flask.client import OAuth
 from flask_admin import Admin
 from config import Config
 from app.admin import CustomIndexView
+from celery import Celery
+import celeryconfig
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -22,6 +24,7 @@ bootstrap = Bootstrap()
 oauth = OAuth()
 moment = Moment()
 principals = Principal()
+celery = Celery(__name__, broker=Config.BROKER_URL)
 
 
 def create_app(config_class=Config):
@@ -34,8 +37,16 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     oauth.init_app(app)
     moment.init_app(app)
-    admin = Admin(app, name='videocollect', template_mode='bootstrap3', index_view=CustomIndexView(), base_template='admin/main.html')
+    admin = Admin(
+        app, 
+        name='videocollect', 
+        template_mode='bootstrap3', 
+        index_view=CustomIndexView(), 
+        base_template='admin/main.html'
+    )
     principals.init_app(app)
+    celery.conf.update(app.config)
+    celery.config_from_object(celeryconfig)
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
