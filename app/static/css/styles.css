@@ -192,3 +192,14 @@ img.avatar {
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
+
+.confirmation {
+    padding-left:1em; 
+    display:none;
+    color: #aec251;
+}
+
+.loader {
+    padding-left:1em; 
+    display: none;
+}

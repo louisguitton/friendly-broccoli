@@ -4,6 +4,7 @@ import boto3
 from botocore.exceptions import ParamValidationError
 
 from app.upload import bp
+from app.models import Question
 
 
 s3_client = boto3.client('s3')
@@ -13,7 +14,7 @@ s3_client = boto3.client('s3')
 @login_required
 def get_signed_url():
     # http://127.0.0.1:5000/upload/url?prefix=bar/baz&key=test.csv&content_type=text/csv
-    prefix = request.args.get('prefix', default = None, type = str)
+    prefix = request.args.get('prefix', default = '', type = str)
     key = request.args.get('key', default = None, type = str)
     content_type = request.args.get('content_type', default = None, type = str)
 
@@ -22,8 +23,8 @@ def get_signed_url():
             ClientMethod='put_object',
             Params={
             'Bucket': current_app.config["S3"]["S3_BUCKET"],
-            'Key': "{}/{}".format(prefix, key),
-            'ContentType': content_type
+            'Key': "{}/{}".format(prefix, key) if prefix else "{}".format(key),
+            'ContentType': content_type,
             })
 
         return jsonify({"url": url})
@@ -33,4 +34,17 @@ def get_signed_url():
 
 @bp.route('/', methods=['GET', 'POST'])
 def upload():
-    return render_template('upload/form.html')
+    q = Question.query.first()
+    video_settings = {
+        'controls': True,
+        'fluid': True,
+        'plugins': {
+            'record': {
+                'audio': True,
+                'video': True,
+                'maxLength': 30,
+                'debug': False
+            }
+        }
+    }
+    return render_template('upload/form.html', q=q, video_settings=video_settings)

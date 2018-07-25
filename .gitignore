@@ -6,7 +6,7 @@ env
 venv/
 .vscode/
 test.csv
-
+cache
 
 # Ignore redis binary dump (dump.rdb) files
 *.rdb

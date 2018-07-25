@@ -9,6 +9,7 @@
   "author": "Louis Guitton",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.2.0",
     "videojs-record": "^2.3.1"
   }
 }
