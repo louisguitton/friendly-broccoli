@@ -4,6 +4,7 @@
   * when upload video, create row in Videos
   * when first apply, create a Submission; when post for question, add to Submission
   * Upload client-to-S3 directcly with pre-signed URL instead of client-to-server-to-S3
+    * check [this](https://github.com/heryandi/flask-s3/blob/master/templates/index.html)
   * use celery for background jobs, architecture is decribed for Ruby [here](https://twin.github.io/file-uploads-asynchronous-world/)
 * add personality test and english test to the flow and Submission
 * other misc

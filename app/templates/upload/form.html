@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>S3 Signed URL Upload Test</title>
+  </head>
+  <body>
+    <form id="theForm" method="POST" enctype="multipart/form-data" >
+        <input id="theFile" name="file" type="file"/> 
+        <button id="theButton" type="submit">Submit</button>
+    </form>
+  </body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+    $.get(
+        "{{ url_for('upload.get_signed_url') }}",
+        {
+            prefix: 'bar/baz',
+            key: 'test.csv',
+            content_type: 'text/csv'
+        },
+        function(data){
+            var the_url= data['url']
+            console.log('Signed URL: ' + the_url);
+    
+            $('#theForm').on('submit', sendFile);
+
+            function sendFile(e) {
+                e.preventDefault();
+                console.log('Sending file');
+                
+                var theFormFile = $('#theFile').get()[0].files[0];
+                console.log(theFormFile);
+                
+                var result = $.ajax({
+                    type: 'PUT',
+                    url: the_url,
+                    contentType: 'text/csv',
+                    processData: false,
+                    data: theFormFile,
+                    success: function(req, err) {
+                    console.log('File uploaded: ' + err);
+                    },
+                    error: function(req, err) {
+                    console.log('File NOT uploaded: ' + err);
+                    }
+                });
+                
+                return false;
+            }
+        }
+    );
+
+
+  </script>
+</html>
