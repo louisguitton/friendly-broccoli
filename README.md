@@ -75,3 +75,10 @@ To start celery
 ```bash
 → celery beat -A videocollect.celery --loglevel=info
 ```
+
+### Debugging
+```
+sudo cat /var/log/videocollect_access.log
+sudo cat /var/log/videocollect_error.log
+sudo journalctl -u videocollect
+```
