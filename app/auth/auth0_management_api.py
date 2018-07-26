@@ -7,18 +7,21 @@ from config import Config
 from app.auth import bp
 
 
-get_token = GetToken(Config.AUTH0_DOMAIN)
-token = get_token.client_credentials(
-    Config.AUTH0_NON_INTERACTIVE_CLIENT_ID,
-    Config.AUTH0_NON_INTERACTIVE_CLIENT_SECRET, 
-    Config.AUTH0_BASE_URL + '/api/v2/'
-    )
-mgmt_api_token = token['access_token']
+def get_management_api_client():
+    get_token = GetToken(Config.AUTH0_DOMAIN)
+    token = get_token.client_credentials(
+        Config.AUTH0_NON_INTERACTIVE_CLIENT_ID,
+        Config.AUTH0_NON_INTERACTIVE_CLIENT_SECRET, 
+        Config.AUTH0_BASE_URL + '/api/v2/'
+        )
+    mgmt_api_token = token['access_token']
 
-auth0 = Auth0(Config.AUTH0_DOMAIN, mgmt_api_token)
+    auth0 = Auth0(Config.AUTH0_DOMAIN, mgmt_api_token)
+    return auth0
 
 
 def get_user(user_id):
+    auth0 = get_management_api_client()
     return auth0.users.get(user_id)
 
 @bp.route('/api/users/<user_id>')
