@@ -34,10 +34,11 @@ class UserAdmin(CustomView):
 
 def init_admin(f_admin):
     from app import db
-    from app.models import User, Question
+    from app.models import User, Question, Video
 
     f_admin.add_view(UserAdmin(User, db.session))
     f_admin.add_view(CustomView(Question, db.session))
+    f_admin.add_view(CustomView(Video, db.session))
 
 
 def register_principal_identity_signal(app):

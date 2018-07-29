@@ -1,10 +1,10 @@
 from flask import current_app, jsonify, flash, request, render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
 import boto3
 from botocore.exceptions import ParamValidationError
 
 from app.upload import bp
-from app.models import Question
+from app.models import User, Question, Video, UserAgentSchema, VideoSchema
 
 
 s3_client = boto3.client('s3')
@@ -30,6 +30,21 @@ def get_signed_url():
         return jsonify({"url": url})
     except ParamValidationError:
         return "need more args"
+
+
+@bp.route('/enqueue')
+@login_required
+def enqueue_video():
+    key = request.args.get('key', default = None, type = str)
+    question_id = request.args.get('question_id', default = None, type = int)
+
+    v = Video(
+        applicant=current_user._get_current_object(),
+        question=Question.query.get(question_id),
+        s3_key=key,
+        user_agent=UserAgentSchema().dump(request.user_agent)[0]
+        )
+    return VideoSchema().jsonify(v)
 
 
 @bp.route('/', methods=['GET', 'POST'])

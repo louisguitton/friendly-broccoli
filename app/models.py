@@ -1,8 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin
 
-from app import db
-from app import login
+from app import db, ma, login
 
 
 @login.user_loader
@@ -59,42 +58,36 @@ class Video(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
     submission_id = db.Column(db.Integer, db.ForeignKey('submission.id'))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    url = db.Column(db.String(140), index=True, unique=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    s3_key = db.Column(db.String(140), index=True, unique=True)
+    user_agent = db.Column(db.JSON)
 
     '''
-    has_audio
-    has_video
-    max_duration
     duration
     size
-    device_id
     '''
 
     def __repr__(self):
-        return '<Video {}>'.format(self.url)
+        return '<Video {}>'.format(self.s3_key)
 
 
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    creation_date = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    submission_date = db.Column(db.DateTime, index=True)
+    creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+    submission_date = db.Column(db.DateTime)
     # state = db.Column
     videos = db.relationship('Video', backref='submission', lazy='dynamic')
 
-    '''
-    state (0, 1, 2, 3)
-    '''
     def __repr__(self):
         return '<Submission ({}, {})>'.format(self.creation_date, self.submission_date)
 
 
+class UserAgentSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('platform', 'browser', 'version', 'language')
 
-
-'''
-# Device
-user_agent
-browser
-version%  
-'''
+class VideoSchema(ma.ModelSchema):
+    class Meta:
+        model = Video

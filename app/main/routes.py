@@ -5,10 +5,9 @@ from werkzeug.utils import secure_filename
 
 from app import db
 from app.main.forms import ApplyForm
-from app.models import User
+from app.models import User, Question, Video, Submission
 from app.helpers import upload_file_to_s3
 from app.main import bp
-from app.models import Question
 
 
 @bp.before_app_request
@@ -82,7 +81,6 @@ def find_question():
                     'record': {
                         'audio': True,
                         'video': True,
-                        'maxLength': 30,
                         'debug': False
                     }
                 }

@@ -5,9 +5,10 @@
   <!-- * use one of the excellent JavaScript libraries for generic file uploads -->
   * After cached file is uploaded, the form field is filled with file’s identifier
   * When the form is submitted, only the identifier is sent over the wire
-  * Processing and storing is kicked into a background job (celery)
+  * if needed, Processing and storing is kicked into a background job (celery)
   * Record saves instantaneously (create row in Videos; when first apply, create a Submission; when post for question, add to Submission)
   * Background job on completion updates the record with stored attachment(s)
+  * fix the bug: when re-recording a video, both the old one and the new one get submitted
 * add personality test and english test to the flow and Submission
 * other misc
   * do a proper json API (maybe using Marshmallow) so that later the frontend can be done in React
