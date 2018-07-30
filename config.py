@@ -44,3 +44,5 @@ class Config(object):
     CELERY_RESULT_BACKEND = BROKER_URL
 
     ALLOWED_EXTENSIONS = set(['webm', 'mp4'])
+
+    SERVER_NAME = os.environ.get("SERVER_NAME")

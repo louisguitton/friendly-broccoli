@@ -124,10 +124,28 @@ class VideoSchema(BaseSchema):
     class Meta(BaseSchema.Meta):
         model = Video
 
+    submission = ma.HyperlinkRelated('api.submission_detail', id='<submission>')
+
+    # Smart hyperlinking
+    _links = ma.Hyperlinks({
+        'self': ma.URLFor('api.video_detail', id='<id>'),
+        'collection': ma.URLFor('api.list_videos')
+        # applicant
+        # question
+    })
+
 Video.__schema__ = VideoSchema
 
 class SubmissionSchema(BaseSchema):
     class Meta(BaseSchema.Meta):
         model = Submission
+    
+    videos = ma.List(ma.HyperlinkRelated('api.video_detail', id='<videos>'))
+
+    # Smart hyperlinking
+    _links = ma.Hyperlinks({
+        'self': ma.URLFor('api.submission_detail', id='<id>'),
+        'collection': ma.URLFor('api.list_submissions')
+    })
 
 Submission.__schema__ = SubmissionSchema

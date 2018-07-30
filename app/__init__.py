@@ -40,10 +40,10 @@ def create_app(config_class=Config):
     oauth.init_app(app)
     moment.init_app(app)
     admin = Admin(
-        app, 
-        name='videocollect', 
-        template_mode='bootstrap3', 
-        index_view=CustomIndexView(), 
+        app,
+        name='videocollect',
+        template_mode='bootstrap3',
+        index_view=CustomIndexView(),
         base_template='admin/main.html'
     )
     principals.init_app(app)
@@ -66,6 +66,9 @@ def create_app(config_class=Config):
 
     from app.upload import bp as upload_bp
     app.register_blueprint(upload_bp, url_prefix='/upload')
+
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
 
     if not app.debug and not app.testing:
         if not os.path.exists('logs'):
