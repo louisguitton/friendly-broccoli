@@ -1,8 +1,8 @@
-from flask import redirect, url_for, request, current_app
+from flask import redirect, url_for, request
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import AdminIndexView
 from flask_login import current_user
-from flask_principal import Permission, RoleNeed, identity_loaded, UserNeed
+from flask_principal import Permission, RoleNeed, identity_loaded
 
 
 admin_role = RoleNeed('admin')
@@ -34,11 +34,12 @@ class UserAdmin(CustomView):
 
 def init_admin(f_admin):
     from app import db
-    from app.models import User, Question, Video
+    from app.models import User, Question, Video, Submission
 
     f_admin.add_view(UserAdmin(User, db.session))
     f_admin.add_view(CustomView(Question, db.session))
     f_admin.add_view(CustomView(Video, db.session))
+    f_admin.add_view(CustomView(Submission, db.session))
 
 
 def register_principal_identity_signal(app):
