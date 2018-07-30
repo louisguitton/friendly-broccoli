@@ -1,6 +1,7 @@
 ### TO DO
 
 * improve video storage
+  * a submission's questions are accessible via videos, why directly ?
   * add question id to S3 name
   * fix the bug: when re-recording a video, both the old one and the new one get submitted
 * add personality test and english test to the flow and Submission
