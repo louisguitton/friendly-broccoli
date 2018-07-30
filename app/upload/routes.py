@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 import boto3
 from botocore.exceptions import ParamValidationError
 
+from app import db
 from app.upload import bp
 from app.models import User, Question, Video, UserAgentSchema, VideoSchema
 
@@ -44,22 +45,6 @@ def enqueue_video():
         s3_key=key,
         user_agent=UserAgentSchema().dump(request.user_agent)[0]
         )
+    db.session.add(v)
+    db.session.commit()
     return VideoSchema().jsonify(v)
-
-
-@bp.route('/', methods=['GET', 'POST'])
-def upload():
-    q = Question.query.first()
-    video_settings = {
-        'controls': True,
-        'fluid': True,
-        'plugins': {
-            'record': {
-                'audio': True,
-                'video': True,
-                'maxLength': 30,
-                'debug': False
-            }
-        }
-    }
-    return render_template('upload/form.html', q=q, video_settings=video_settings)
