@@ -1,7 +1,7 @@
 ### TO DO
 
+* add impressum and privacy policy
 * improve video storage
-  * fix Internal Server Error that comes after auth0's managemepent API token expired
   * add question id to S3 name
   * a submission's questions are accessible via videos, why directly ?
   * handle submission delete (if no videos then delete, if submission delete then videos delete) and video delete (if video delete then S3 files delete)
