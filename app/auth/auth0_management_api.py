@@ -19,7 +19,6 @@ def get_management_api_client():
     auth0 = Auth0(Config.AUTH0_DOMAIN, mgmt_api_token)
     return auth0
 
-
 def get_user(user_id):
     auth0 = get_management_api_client()
     return auth0.users.get(user_id)

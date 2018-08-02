@@ -15,3 +15,7 @@ auth0-python
 python3-linkedin
 flask-admin
 flask-principal
+celery
+redis
+flask-marshmallow
+marshmallow-sqlalchemy

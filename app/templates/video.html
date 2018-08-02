@@ -46,10 +46,23 @@
                     <div class="card-body">
                         <p>
                             Click on <span class="vjs-icon-av-perm gi-2x" aria-hidden="true"></span> to allow the use of the camera. <br>
-                            Click on <span class="vjs-icon-record-start gi-2x" aria-hidden="true"></span> to start recording. <br>
-                            Click on <span class="vjs-icon-record-stop gi-3x" aria-hidden="true"></span> to stop recording.
+                            Click on <span class="fas fa-circle gi-2x" aria-hidden="true"></span> to start recording. <br>
+                            Click on <span class="fas fa-stop gi-2x" aria-hidden="true"></span> to stop recording.
                         </p>
-                        <button id="submit-{{loop.index}}" type="button" class="btn btn-primary" disabled>Submit</button>                   
+                        <div class="row">
+                            <a href=# role="button" id="submit-{{loop.index}}" class="btn btn-primary disabled">
+                                <i class="fas fa-upload"></i> 
+                                Submit
+                            </a>                   
+                            <span id="loader-{{loop.index}}" class="loader">
+                                <i class="fas fa-spinner fa-pulse gi-3x"></i>
+                                Uploading...
+                            </span>
+                            <span id="confirmation-{{loop.index}}" class="confirmation"> 
+                                <i class="far fa-check-square gi-3x"></i>
+                                Success
+                            </span> 
+                        </div>
                     </div><!-- card content -->
                     <div class="card-footer text-muted">
                         (up to {{ q["length_in_sec"] }} seconds)
@@ -77,6 +90,7 @@
                     // user clicked the record button and started recording
                     player.on('startRecord', function() {
                         console.log('started recording!');
+                        $("#confirmation-{{loop.index}}").hide();
                     });
                     
                     // user completed recording and stream is available
@@ -90,27 +104,66 @@
                             // for chrome for audio+video
                             data = this.recordedData.video;
                         }
+
+                        // ensure unique name
+                        var unique_name = data.name.split('.webm')[0] + '_' + "{{ current_user.auth0_id }}" + ".webm";
+                        data.name = unique_name                        
+
+                        $("#submit-{{loop.index}}").removeClass("disabled");
                         
-                        $("#submit-{{loop.index}}").prop("disabled", false);
+                        $.get(
+                            "{{ url_for('upload.get_signed_url') }}",
+                            {
+                                key: data.name,
+                                content_type: 'video/webm'
+                            },
+                            function(url_json){
+                                var the_url= url_json['url']
+                                console.log('Signed URL: ' + the_url);
                         
-                        var serverUrl = '/questions'
-                        
-                        document.getElementById("submit-{{loop.index}}").addEventListener("click", async function(ev) {
-                            var formData = new FormData();
-                            formData.append('file', data, data.name);
-                            
-                            console.log('uploading recording:', data.name);
-                            
-                            fetch(serverUrl, {
-                                method: 'POST',
-                                body: formData
-                            }).then(
-                            success => console.log('recording upload complete.')
-                            ).catch(
-                            error => console.error('an upload error occurred!')
-                            );
-                            
-                        }, false);
+                                $('#submit-{{loop.index}}').on('click', sendFile);
+
+                                function sendFile(e) {
+                                    e.preventDefault();
+                                    console.log('Sending file');
+                                    $("#submit-{{loop.index}}").addClass("disabled");
+                                    $("#loader-{{loop.index}}").fadeIn();
+                                    
+                                    var theFormFile = data;
+                                    console.log(theFormFile);
+                                    
+                                    var result = $.ajax({
+                                        type: 'PUT',
+                                        url: the_url,
+                                        contentType: 'video/webm',
+                                        processData: false,
+                                        data: theFormFile,
+                                        success: function(req, err) {
+                                            console.log('File uploaded: ' + err);
+                                            $("#loader-{{loop.index}}").hide();
+                                            $("#confirmation-{{loop.index}}").fadeIn();
+
+                                            // send the video id over the wire to be persisted in the DB
+                                            $.get(
+                                                "{{ url_for('upload.enqueue_video') }}",
+                                                {
+                                                    key: data.name,
+                                                    question_id: {{ q.id }} 
+                                                },
+                                                function(resp){
+                                                    console.log(resp);
+                                                }
+                                            );
+                                        },
+                                        error: function(req, err) {
+                                            console.log('File NOT uploaded: ' + err);
+                                        }
+                                    });
+                                    
+                                    return false;
+                                }
+                            }
+                        );                        
                     });
                 </script>
             </div>
@@ -119,16 +172,3 @@
     </div><!-- /.row -->
 </div>
 {% endblock app_content %}
-    
-    
-{% block javascript %}
-<script>
-    $(document).ready(function () {
-        $('#lets-go').click(function(e) {
-            e.preventDefault();
-            $('#apply-form-container').slideDown();
-            $('#intro').slideUp();
-        });	
-    });
-</script>
-{% endblock %}

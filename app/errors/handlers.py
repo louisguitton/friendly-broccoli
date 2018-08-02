@@ -15,7 +15,7 @@ def internal_error(error):
 def unhandled_exception(e):
     db.session.rollback()
     current_app.logger.error('Unhandled Exception: %s', (e))
-    return render_template('errors/500.htm'), 500
+    return render_template('errors/500.html'), 500
 
 
 @bp.app_errorhandler(404)
