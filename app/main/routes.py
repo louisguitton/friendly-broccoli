@@ -65,3 +65,12 @@ def find_question():
         questions = Question.query.order_by("order_pos asc").all()
         return render_template('video.html', questions=questions, video_settings=video_settings)
     return redirect(url_for('main.apply'))
+
+
+@bp.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+@bp.route('/impressum')
+def impressum():
+    return render_template('impressum.html')

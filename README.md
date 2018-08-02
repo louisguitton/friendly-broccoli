@@ -1,6 +1,7 @@
 ### TO DO
 
-* add impressum and privacy policy
+* add about page
+* add a real landing page that explains what we're doing
 * improve video storage
   * add question id to S3 name
   * a submission's questions are accessible via videos, why directly ?

@@ -96,7 +96,10 @@ lang="en"
             <li class="list-inline-item"><a href="{{ url_for('main.index') }}">Home</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.apply') }}">Apply</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.about') }}">About</a></li>
+            <li class="list-inline-item"><a href="{{ url_for('main.privacy_policy') }}">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="{{ url_for('main.impressum') }}">Impressum</a></li>
             {% if g.identity.provides %}
+            <li class="footer-menu-divider list-inline-item">⋅</li>
             <li class="list-inline-item"><a href="{{ url_for('admin.index') }}">Admin</a></li>
             {% endif %}
             <li class="footer-menu-divider list-inline-item">⋅</li>

@@ -88,7 +88,10 @@ Admin | 1024 Germany
                     <li><a href="{{ url_for('main.index') }}">Home</a></li>
                     <li><a href="{{ url_for('main.apply') }}">Apply</a></li>
                     <li><a href="{{ url_for('main.about') }}">About</a></li>
-                    {% if not current_user.is_anonymous %}
+                    <li><a href="{{ url_for('main.privacy_policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('main.impressum') }}">Impressum</a></li>
+                    {% if g.identity.provides %}
+                    <li class="footer-menu-divider">⋅</li>
                     <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
                     {% endif %}
                     <li class="footer-menu-divider">⋅</li>
