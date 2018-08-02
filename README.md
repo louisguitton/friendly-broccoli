@@ -1,7 +1,7 @@
 ### TO DO
 
+* refactor CSS with SASS
 * add about page
-* add a real landing page that explains what we're doing
 * improve video storage
   * add question id to S3 name
   * a submission's questions are accessible via videos, why directly ?
@@ -13,7 +13,6 @@
   * deploy using a PaaS like GCP instead of managing a Linux server (relevant for the DB mainly?) (or with Docker + Kubernetes)
   * add a few tests
   * translate to spanish, french, egyptian if that makes sense using [this article](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n) 
-  * refactor CSS with SASS
   * [Call the Linkedin API](https://auth0.com/docs/connections/calling-an-external-idp-api) with the received token to get a more complete user profile 
   * get additional scopes from the linkedin API (r_fullprofile and r_network) through their partner program
 

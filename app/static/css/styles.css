@@ -1,26 +1,19 @@
 /* app/static/css/style.css */
 
-body, html {
-    width: 100%;
-    height: 100%;
-}
-
-html {
-    overflow-y: scroll;
-}
-
-body, h1, h2, h3 {
+body{
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-h1, h2, h3 {
-    font-weight: bold;
-    color: #aec251;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Catamaran', "Lato";
+    font-weight: bolder !important;
 }
 
-h5 {
-    font-weight: bold;
-}
 
 ::selection {
     background: #555;
@@ -30,6 +23,21 @@ h5 {
 a {
     cursor: pointer;
 }
+
+.navbar-brand {
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(20, 20, 20, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+  
+.navbar-toggler {
+    border-color: rgb(20, 20, 20);
+} 
 
 a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
     color: #aec251;
@@ -83,36 +91,47 @@ p.copyright {
     height: 4em;
 }
 
-.intro-divider {
-    width: 400px;
-    border-top: 1px solid #f8f8f8;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-}
-
-.intro-header {
-    background: url(../img/intro-bg.jpg) no-repeat center center;
-    background-size: cover ;
-    color: #f8f8f8;
-    text-align: center;
-    padding: 0 0 40%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.intro-message {
+header.masthead {
     position: relative;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    overflow: hidden;
+    padding-top: calc(7rem + 72px);
+    padding-bottom: 7rem;
+    background: url(../img/intro-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
 }
 
-.intro-message > h1 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
+header.masthead .masthead-content {
+    z-index: 1;
+    position: relative;
 }
 
-.intro-message > h3 {
+header.masthead .masthead-content .masthead-heading {
+    font-size: 4rem;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+header.masthead .masthead-content .masthead-subheading {
+    font-size: 2rem;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+
+@media (min-width: 992px) {
+    header.masthead {
+        padding-top: calc(10rem + 55px);
+        padding-bottom: 10rem;
+    }
+    header.masthead .masthead-content .masthead-heading {
+        font-size: 6rem;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    }
+    header.masthead .masthead-content .masthead-subheading {
+        font-size: 4rem;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    }
 }
 
 .lead {
@@ -156,7 +175,7 @@ img.avatar {
     vertical-align: middle;
     padding: 12px 24px;
     border: 1px solid #687430;
-    border-radius: 29px;
+    border-radius: 5rem;
     background: #aec251;
     background: -webkit-gradient(linear, left top, left bottom, from(#aec251), to(#687430));
     background: -moz-linear-gradient(top, #aec251, #687430);

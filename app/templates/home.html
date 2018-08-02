@@ -2,19 +2,86 @@
 {% block title %}Home{% endblock %}
 
 {% block app_content %}
-<div class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="intro-message">
-                    <h1>Nail the First Interview</h1>
-                    <h3>Brought to you by Imagine Foundation and Chalearn</h3>
-                    <hr class="intro-divider">
-                    <a href="{{url_for('main.apply')}}" class="btn btn-primary">Apply</a>
-                </ul>
-            </div>
+<header class="masthead text-center text-white">
+        <div class="masthead-content">
+          <div class="container">
+            <h1 class="masthead-heading mb-0">1024 Germany</h1>
+            <h2 class="masthead-subheading mb-0">Prepare for Interviews</h2>
+            <a href="{{url_for('main.apply')}}" class="btn btn-primary mt-5">Apply</a>
+          </div>
         </div>
-    </div>
-</div>
-</div>
+      </header>
+  
+      <section>
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+              <div class="p-5">
+                <img class="img-fluid rounded-circle" src="{{ url_for('static', filename='img/01.jpg') }}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+              <div class="p-5">
+                <h2 class="display-4">You're have an Interview</h2>
+                <p>
+                    Looking for the next best job ? You're preparing for thte next big step in your career. But first interviews can be daunting...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section>
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="p-5">
+                <img class="img-fluid rounded-circle" src="{{ url_for('static', filename='img/02.jpg') }}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <h2 class="display-4">Prepare for Typical Questions</h2>
+                <p>
+                    We developped with psychologists a list of questions that HR people use to get to know your personality.
+                    Rehearse by answering them live on video.
+                    How do you look like under the spotlight ? 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section>
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+              <div class="p-5">
+                <img class="img-fluid rounded-circle" src="{{ url_for('static', filename='img/03.jpg') }}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+              <div class="p-5">
+                <h2 class="display-4">Get to Know Yourself</h2>
+                <p>
+                    Ever heard of MBTI or Big 5 personality tests ?
+                    Those are representations that HR professionals use to picture you in the workplace.
+                    Get to know your personality type to show your best self.
+                </p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+          <div class="container text-center masthead-content">
+                <div class="control-group">
+                    <a href="{{url_for('main.apply')}}" class="btn btn-primary mt-5">Apply</a>
+                </div>
+            </div>
+      </section>
+  
 {% endblock %}
