@@ -2,12 +2,12 @@
 
 * refactor CSS with SASS
 * add about page
+* add personality test and english test to the flow and Submission
 * improve video storage
   * add question id to S3 name
   * a submission's questions are accessible via videos, why directly ?
   * handle submission delete (if no videos then delete, if submission delete then videos delete) and video delete (if video delete then S3 files delete)
   * fix the bug: when re-recording a video, both the old one and the new one get submitted
-* add personality test and english test to the flow and Submission
 * other misc
   * do a proper json API (maybe using Marshmallow) so that later the frontend can be done in React
   * deploy using a PaaS like GCP instead of managing a Linux server (relevant for the DB mainly?) (or with Docker + Kubernetes)
