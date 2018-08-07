@@ -2,13 +2,14 @@ from flask import current_app, jsonify, request, session
 from flask_login import login_required, current_user
 import boto3
 from botocore.exceptions import ParamValidationError
+from botocore.client import Config
 
 from app import db
 from app.upload import bp
 from app.models import Question, Video, UserAgentSchema, Submission
 
 
-s3_client = boto3.client('s3')
+s3_client = boto3.client('s3', config=Config(signature_version='s3v4'))
 
 
 @bp.route('/url')
