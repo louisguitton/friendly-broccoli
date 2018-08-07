@@ -25,7 +25,8 @@ class Config(object):
         "S3_BUCKET": os.environ.get("S3_BUCKET"),
         "S3_KEY": os.environ.get("AWS_ACCESS_KEY_ID"),
         "S3_SECRET": os.environ.get("AWS_SECRET_ACCESS_KEY"),
-        "S3_LOCATION": 'http://{}.s3.amazonaws.com/'.format(os.environ.get("S3_BUCKET"))
+        "S3_LOCATION": 'http://{}.s3.amazonaws.com/'.format(os.environ.get("S3_BUCKET")),
+        "S3_REGION": os.environ.get("S3_REGION")
     }
 
     AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')

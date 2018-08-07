@@ -2,14 +2,15 @@ from flask import current_app, jsonify, request, session
 from flask_login import login_required, current_user
 import boto3
 from botocore.exceptions import ParamValidationError
-from botocore.client import Config
+from botocore.client import Config as BotoConfig
 
 from app import db
 from app.upload import bp
 from app.models import Question, Video, UserAgentSchema, Submission
+from config import Config
 
 
-s3_client = boto3.client('s3', config=Config(signature_version='s3v4'))
+s3_client = boto3.client('s3', region_name=Config.S3['S3_REGION'], config=BotoConfig(signature_version='s3v4'))
 
 
 @bp.route('/url')
@@ -27,7 +28,8 @@ def get_signed_url():
                 'Bucket': current_app.config["S3"]["S3_BUCKET"],
                 'Key': "{}/{}".format(prefix, key) if prefix else "{}".format(key),
                 'ContentType': content_type,
-            })
+            }
+        )
 
         return jsonify({"url": url})
     except ParamValidationError:
@@ -46,7 +48,7 @@ def enqueue_video():
         s3_key=key,
         user_agent=UserAgentSchema().dump(request.user_agent).data,
         submission=Submission.from_dict(session['submission'])
-        )
+    )
     db.session.add(v)
     db.session.commit()
     return jsonify(v.to_dict())
