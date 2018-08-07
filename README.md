@@ -1,7 +1,10 @@
 ### TO DO
 
-* refactor CSS with SASS
-* add about page
+* prepare for alpha release
+  * add intercom
+  * add tool for user feedback and bug report https://www.userback.io
+  * add about page
+  * refactor CSS with SASS
 * add personality test and english test to the flow and Submission
 * improve video storage
   * add question id to S3 name

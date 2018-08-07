@@ -67,6 +67,9 @@ lang="en"
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('admin.index') }}">Admin</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://manage.auth0.com/#/" target='blank'>Auth0</a>
+                </li>
                 {% endif %}
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
@@ -102,6 +105,9 @@ lang="en"
             {% if g.identity.provides %}
             <li class="footer-menu-divider list-inline-item">⋅</li>
             <li class="list-inline-item"><a href="{{ url_for('admin.index') }}">Admin</a></li>
+            <li class="list-inline-item">
+                <a href="https://manage.auth0.com/#/" target='blank'>Auth0</a>
+            </li>
             {% endif %}
             <li class="footer-menu-divider list-inline-item">⋅</li>
             {% if current_user.is_anonymous %}
