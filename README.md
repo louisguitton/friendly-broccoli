@@ -6,8 +6,8 @@
   * add about page
   * refactor CSS with SASS
 * add personality test and english test to the flow and Submission
+* add a view to the for the user to see his submissions and associated videos
 * improve video storage
-  * add question id to S3 name
   * a submission's questions are accessible via videos, why directly ?
   * handle submission delete (if no videos then delete, if submission delete then videos delete) and video delete (if video delete then S3 files delete)
   * fix the bug: when re-recording a video, both the old one and the new one get submitted
@@ -61,6 +61,9 @@ $ cd project
 $ source venv/bin/activate
 (venv) $ git pull                              
 (venv) $ pip install -r requirements.txt
+(venv) $ cd app/static
+(venv) $ npm install
+(venv) $ cd ../..
 (venv) $ sudo systemctl stop videocollect
 (venv) $ flask db upgrade                      
 (venv) $ sudo systemctl start videocollect    

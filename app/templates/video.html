@@ -106,15 +106,15 @@
                         }
 
                         // ensure unique name
-                        var unique_name = data.name.split('.webm')[0] + '_' + "{{ current_user.auth0_id }}" + ".webm";
-                        data.name = unique_name                        
-
+                        var unique_name = data.name.split('.webm')[0] + '_' + "{{ current_user.auth0_id }}" + '_' + {{ q.id }} + ".webm";
+                        data.name = unique_name
+                
                         $("#submit-{{loop.index}}").removeClass("disabled");
                         
                         $.get(
                             "{{ url_for('upload.get_signed_url') }}",
                             {
-                                key: data.name,
+                                key: unique_name,
                                 content_type: 'video/webm'
                             },
                             function(url_json){
@@ -147,7 +147,7 @@
                                             $.get(
                                                 "{{ url_for('upload.enqueue_video') }}",
                                                 {
-                                                    key: data.name,
+                                                    key: unique_name,
                                                     question_id: {{ q.id }} 
                                                 },
                                                 function(resp){
