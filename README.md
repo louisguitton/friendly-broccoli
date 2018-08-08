@@ -4,9 +4,13 @@
   * improve loading speed
     * minify HTML & CSS or combine assets - webpack / flask-assets (pas conseillé)
   * refactor CSS with SASS
-* add personality test and english test to the flow and Submission
-* add a view to the for the user to see his submissions and associated videos
+* What to do after STEP 2
+  * add personality test and english test to the flow and Submission
+  * add a view to the for the user to see his submissions and associated videos
 * improve video storage
+  * when julio recorded a bunch of questions, the related submission was stored only for one video
+  * when julio logged out from the website, he was still logged in on Linkedin
+  * submit videos all at once ??
   * a submission's questions are accessible via videos, why directly ?
   * handle submission delete (if no videos then delete, if submission delete then videos delete) and video delete (if video delete then S3 files delete)
   * fix the bug: when re-recording a video, both the old one and the new one get submitted
