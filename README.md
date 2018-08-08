@@ -1,6 +1,9 @@
 ### TO DO
 
 * prepare for alpha release
+  * improve loading speed
+    * minify HTML & CSS
+    * implement AMP (?)
   * refactor CSS with SASS
 * add personality test and english test to the flow and Submission
 * add a view to the for the user to see his submissions and associated videos

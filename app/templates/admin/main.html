@@ -28,8 +28,8 @@ Admin | Personality Interview
 <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
 <!-- /favicons -->
 
-{{ moment.include_jquery() }}
-{{ moment.include_moment() }}
+{{ moment.include_jquery(local_js=url_for('static', filename='node_modules/jquery/dist/jquery.min.js')) }}
+{{ moment.include_moment(local_js=url_for('static', filename='node_modules/moment/min/moment.min.js')) }}
 
 <style>
     body{
