@@ -41,6 +41,18 @@ lang="en"
 {{ moment.include_jquery() }}
 {{ moment.include_moment() }}
 
+<script type="text/javascript">
+    window.$crisp=[];
+    window.CRISP_WEBSITE_ID="b078ee71-dcaa-4ac8-bbd1-38487e7ecfd3";
+    (function(){
+        d=document;
+        s=d.createElement("script");
+        s.src="https://client.crisp.chat/l.js";
+        s.async=1;
+        d.getElementsByTagName("head")[0].appendChild(s);
+    })();
+</script>
+
 {% endblock head %}
 
 {% block navbar %}
@@ -50,7 +62,7 @@ lang="en"
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+        
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
@@ -62,7 +74,7 @@ lang="en"
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
                 </li>
-
+                
                 {% if g.identity.provides %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('admin.index') }}">Admin</a>
