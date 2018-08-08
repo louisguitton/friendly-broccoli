@@ -1,9 +1,9 @@
 ### TO DO
 
 * prepare for alpha release
-  * add intercom
-  * add tool for user feedback and bug report https://www.userback.io
-  * add about page
+  * double check responsiveness
+  * optimize SEO https://neilpatel.com/seo-analyzer/analyze/results/
+  * change name to something else
   * refactor CSS with SASS
 * add personality test and english test to the flow and Submission
 * add a view to the for the user to see his submissions and associated videos

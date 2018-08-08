@@ -3,17 +3,176 @@
 
 {% block app_content %}
 <div class="container">
-    <div class="content-section">
-        <br/>
-        {{ utils.flashed_messages() }}
-        <br/>
+    <br/>
+    {{ utils.flashed_messages() }}
+    <br/>
+    
+    
+    <section id="about">
         
-        <h1>About Page</h1>
-        <p class="lead">This is just a placeholder page which should be replaced with real content.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tellus ligula, imperdiet id lobortis sit amet, scelerisque non sapien. Duis quis dui quis mauris dapibus fringilla. Pellentesque nec tellus ac diam volutpat malesuada.</p>
-        <p>In quam arcu, interdum vel arcu viverra, vulputate convallis massa. Sed hendrerit velit a arcu euismod, sit amet consequat lacus imperdiet. Nullam quis dui sapien. Vestibulum placerat, justo non fringilla laoreet, dui ipsum posuere nisi, nec vestibulum eros leo ut sapien.</p>
-        <p>Vivamus eu felis sed magna scelerisque semper in et libero. Curabitur sed convallis odio, quis venenatis sapien. In convallis a velit ac commodo. Donec sapien ligula, vestibulum ut nisi accumsan, facilisis pretium est. Fusce varius semper orci, et egestas nulla cursus a. Phasellus aliquam, mi ac adipiscing lobortis, ipsum augue aliquam ligula, quis fermentum mi augue vel ligula.</p>
-        <p>Integer elementum malesuada dolor in aliquet.</p>
-    </div>
+        <div class="container">
+            <h1>About Us</h1>
+            <h3>Our mission is to help you get a job and push the research in understanding people</h3>
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="text-center">
+                        <a href="https://joinimagine.org" target="blank">
+                            <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/04.ico') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h4 class="display-4">Finding a Job is Hard</h4>
+                        <p>
+                            At the <a href="https://joinimagine.org" target="blank">Imagine Foundation</a>, 
+                            our mission is to use deep tech solution to level the playing field
+                            in recruitment. <br>
+                            <br>
+                            So that you can find your next job and fulfill your potential.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center ">
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <a href="https://chalearnlap.cvc.uab.es/" target="blank">
+                            <img class="rounded-circle" src="{{ url_for('static', filename='img/05.jpg') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <h4 class="display-4">Understanding People is Hard</h4>
+                        <p>
+                            Today, Artificial Intelligence is everywhere but machines don't understand us yet. <br>
+                            <br>
+                            That's why at <a href="https://chalearnlap.cvc.uab.es/" target="blank">ChaLearn</a>, a group of world reknown 
+                            researchers are trying to teach machines to understand our personalities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Meet our Team</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/1.jpg') }}" alt="">
+                        <h4>Louis Guitton</h4>
+                        <p class="text-muted">Developer</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="https://twitter.com/louis_guitton">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://linkedin.com/in/louisguitton/">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/2.jpg') }}" alt="">
+                        <h4>Isabelle Guyon</h4>
+                        <p class="text-muted">AI Researcher</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="http://clopinet.com/isabelle/">
+                                    <i class="fas fa-link"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/in/isabelle-guyon-aa371170/">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/3.jpg') }}" alt="">
+                        <h4>Sergio Escalera</h4>
+                        <p class="text-muted">AI Researcher</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="http://sergioescalera.com/">
+                                    <i class="fas fa-link"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/in/sergio-escalera-08572533/">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/4.jpg') }}" alt="">
+                        <h4>Julio Jacques Jr</h4>
+                        <p class="text-muted">AI Researcher</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="https://sites.google.com/view/juliojj">
+                                    <i class="fas fa-link"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/in/juliojacquesjunior/">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/team/5.png') }}" alt="">
+                        <h4>David Gallardo-Pujol</h4>
+                        <p class="text-muted">Psychology Researcher</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="http://www.ub.edu/gdne/dgallardo/en/Home.html">
+                                    <i class="fas fa-link"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/in/gallardopujol/">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="cta">
+        <h1>Prepare for Interviews</h1>
+        <a href="{{url_for('main.apply')}}" class="btn btn-primary mt-5">Apply</a>
+    </section>
 </div>
 {% endblock %}
