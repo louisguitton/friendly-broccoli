@@ -1,8 +1,13 @@
 ### TO DO
 
 * prepare for alpha release
+  * add sitemap
+  * add robots.txt
   * improve loading speed
     * minify HTML & CSS or combine assets - webpack / flask-assets (pas conseillé)
+  * implement google analytics
+  * design logo with standalone symbol
+  * choose the color based on the [competition](https://www.capterra.com/video-interviewing-software/?utf8=%E2%9C%93&users=&sort_options=Most+Reviews)
   * refactor CSS with SASS
 * What to do after STEP 2
   * add personality test and english test to the flow and Submission
