@@ -7,7 +7,6 @@ venv/
 .vscode/
 test.csv
 cache
-.nginx.example
 
 # Ignore redis binary dump (dump.rdb) files
 *.rdb

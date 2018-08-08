@@ -2,8 +2,7 @@
 
 * prepare for alpha release
   * improve loading speed
-    * minify HTML & CSS
-    * implement AMP (?)
+    * minify HTML & CSS or combine assets - webpack / flask-assets (pas conseillé)
   * refactor CSS with SASS
 * add personality test and english test to the flow and Submission
 * add a view to the for the user to see his submissions and associated videos
