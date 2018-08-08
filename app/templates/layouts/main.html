@@ -6,13 +6,13 @@ lang="en"
 {% endblock html_attribs %}
 
 {% block title %}
-{% if title %}{{ title }} | 1024 Germany{% else %}Welcome to 1024 Germany{% endif %}
+{% if title %}{{ title }} | Personality Interview{% else %}Welcome to Personality Interview{% endif %}
 {% endblock title %}
 
 {% block metas %}
 <meta charset="UTF-8">
-<meta name="description" content="Interview Training">
-<meta name="keywords" content="HR,Interview,Video,Personality,Research">
+<meta name="description" content="Prepare for Job Interviews by getting to Know your Personality">
+<meta name="keywords" content="Personality,Interview,Hiring,Job,Prepare,Recruiter">
 <meta name="author" content="Louis Guitton">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {% endblock metas %}
@@ -58,7 +58,7 @@ lang="en"
 {% block navbar %}
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{{ url_for('main.index') }}">1024 Germany</a>
+        <a class="navbar-brand" href="{{ url_for('main.index') }}">Personality Interview</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -69,7 +69,7 @@ lang="en"
                     <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.apply') }}">Apply</a>
+                    <a class="nav-link" href="{{ url_for('main.apply') }}">Interview</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
@@ -110,7 +110,7 @@ lang="en"
     <div class="container">
         <ul class="bd-footer-links list-inline">
             <li class="list-inline-item"><a href="{{ url_for('main.index') }}">Home</a></li>
-            <li class="list-inline-item"><a href="{{ url_for('main.apply') }}">Apply</a></li>
+            <li class="list-inline-item"><a href="{{ url_for('main.apply') }}">Interview</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.about') }}">About</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.privacy_policy') }}">Privacy Policy</a></li>
             <li class="list-inline-item"><a href="{{ url_for('main.impressum') }}">Impressum</a></li>

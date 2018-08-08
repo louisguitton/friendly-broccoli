@@ -79,7 +79,7 @@ def create_app(config_class=Config):
         app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
-        app.logger.info('1024Germany startup')
+        app.logger.info('PersonalityInterview startup')
 
     return app
 

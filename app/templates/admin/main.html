@@ -2,7 +2,7 @@
 {% extends 'admin/base.html' %}
 
 {% block title %}
-Admin | 1024 Germany
+Admin | Personality Interview
 {% endblock title %}
 
 {% block head_meta %}
@@ -49,7 +49,7 @@ Admin | 1024 Germany
                         <span class="icon-bar"></span>
                     </button>
                     {% block brand %}
-                    <a class="navbar-brand topnav" href="{{ url_for('admin.index') }}">Admin | 1024 Germany</a>
+                    <a class="navbar-brand topnav" href="{{ url_for('admin.index') }}">Admin | Personality Interview</a>
                     {% endblock brand %}
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -86,7 +86,7 @@ Admin | 1024 Germany
             <div class="col-lg-12">
                 <ul class="list-inline">
                     <li><a href="{{ url_for('main.index') }}">Home</a></li>
-                    <li><a href="{{ url_for('main.apply') }}">Apply</a></li>
+                    <li><a href="{{ url_for('main.apply') }}">Interview</a></li>
                     <li><a href="{{ url_for('main.about') }}">About</a></li>
                     <li><a href="{{ url_for('main.privacy_policy') }}">Privacy Policy</a></li>
                     <li><a href="{{ url_for('main.impressum') }}">Impressum</a></li>

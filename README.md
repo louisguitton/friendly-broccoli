@@ -1,8 +1,6 @@
 ### TO DO
 
 * prepare for alpha release
-  * optimize SEO https://neilpatel.com/seo-analyzer/analyze/results/
-  * change name to something else
   * refactor CSS with SASS
 * add personality test and english test to the flow and Submission
 * add a view to the for the user to see his submissions and associated videos
@@ -55,7 +53,7 @@ flask db upgrade
 ### Deploying Application Updates
 
 ```bash
-> ssh louis@1024germany.de
+> ssh louis@personalityinterview.com
 $ cd project
 $ source venv/bin/activate
 (venv) $ git pull                              

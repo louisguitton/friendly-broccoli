@@ -23,7 +23,7 @@ def about():
     return render_template('about.html')
 
 
-@bp.route('/apply', methods=['GET', 'POST'])
+@bp.route('/interview', methods=['GET', 'POST'])
 @login_required
 def apply():
     form = ApplyForm(obj=current_user)
