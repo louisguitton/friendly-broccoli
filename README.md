@@ -1,7 +1,6 @@
 ### TO DO
 
 * prepare for alpha release
-  * double check responsiveness
   * optimize SEO https://neilpatel.com/seo-analyzer/analyze/results/
   * change name to something else
   * refactor CSS with SASS

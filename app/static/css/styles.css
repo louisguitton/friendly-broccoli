@@ -56,8 +56,7 @@ p.copyright {
     margin: 15px 0 0;
 }
 
-.alert-info {
-    width: 50%;
+.alert-info, .alert-success {
     margin: auto;
     color: #687430;
     background-color: #e6ecca;
