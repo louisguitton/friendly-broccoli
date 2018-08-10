@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, session
+from flask import render_template, flash, redirect, url_for, session, request, send_from_directory
 from flask_login import current_user, login_required
 
 from app import db
@@ -17,6 +17,11 @@ def before_request():
 @bp.route('/')
 def index():
     return render_template('home.html')
+
+@bp.route('/robots.txt')
+@bp.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory('static', request.path[1:])
 
 @bp.route('/about')
 def about():
