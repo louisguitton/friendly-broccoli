@@ -1,5 +1,6 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/utils.html" as utils %}
+{% import "bootstrap/google.html" as google %}
 
 {% block html_attribs %}
 lang="en"
@@ -132,12 +133,6 @@ lang="en"
 {% endblock content %}
 
 {% block scripts %}
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    {{ super() }}
+    {{ google.uanalytics(config['GOOGLE_ANALYTICS_ID']) }}
 {%- endblock scripts %}

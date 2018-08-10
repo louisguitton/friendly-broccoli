@@ -45,3 +45,5 @@ class Config(object):
     CELERY_RESULT_BACKEND = BROKER_URL
 
     ALLOWED_EXTENSIONS = set(['webm', 'mp4'])
+
+    GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
