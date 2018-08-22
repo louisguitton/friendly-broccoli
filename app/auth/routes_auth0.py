@@ -34,8 +34,9 @@ def login():
     next_page = request.args.get('next')
     session['next'] = next_page
 
+    auth0_callback_url = 'http://{0}{1}'.format(request.host, Config.AUTH0_CALLBACK_ENDPOINT)
     return auth0.authorize_redirect(
-        redirect_uri=Config.AUTH0_CALLBACK_URL, 
+        redirect_uri=auth0_callback_url, 
         audience=Config.AUTH0_AUDIENCE
     )
 
