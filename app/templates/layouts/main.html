@@ -32,7 +32,6 @@ lang="en"
 {{super()}}
 
 <!-- favicons -->
-
 <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.png') }}">
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ url_for('static', filename='ico/apple-touch-icon-144-precomposed.png') }}">
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for('static', filename='ico/apple-touch-icon-114-precomposed.png') }}">
@@ -133,6 +132,8 @@ lang="en"
 {% endblock content %}
 
 {% block scripts %}
-    {{ super() }}
+    <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     {{ google.uanalytics(config['GOOGLE_ANALYTICS_ID']) }}
 {%- endblock scripts %}
