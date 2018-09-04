@@ -1,0 +1,8 @@
+{% extends 'layouts/main.html' %}
+{% block app_content %}
+<div class="container">
+    <h1>CSRF error</h1>
+    <h4>{{ reason }}</h4>
+    <p><a href="{{url_for('main.index')}}">Back</a></p>
+</div>
+{% endblock %}
