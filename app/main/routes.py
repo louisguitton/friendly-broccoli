@@ -27,6 +27,13 @@ def static_from_root():
 def about():
     return render_template('about.html')
 
+@bp.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+@bp.route('/impressum')
+def impressum():
+    return render_template('impressum.html')
 
 @bp.route('/interview', methods=['GET', 'POST'])
 @login_required
@@ -71,11 +78,7 @@ def find_question():
         return render_template('video.html', questions=questions, video_settings=video_settings)
     return redirect(url_for('main.apply'))
 
+@bp.route('/personality')
+def get_personality():
+    return render_template('survey.html')
 
-@bp.route('/privacy-policy')
-def privacy_policy():
-    return render_template('privacy_policy.html')
-
-@bp.route('/impressum')
-def impressum():
-    return render_template('impressum.html')

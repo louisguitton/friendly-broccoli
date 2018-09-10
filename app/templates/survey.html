@@ -1,0 +1,164 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Personality Interview{% endblock %}
+
+
+{% block head %}
+{{super()}}
+<script src="{{ url_for('static', filename='node_modules/survey-jquery/survey.jquery.min.js')}}"></script>
+{% endblock %}
+
+{% block app_content %}
+<div class="container">
+    <div class="content-section apply">
+        
+        <div class="row">
+            <div class="col-sm-4">
+                <h1>
+                    Personality Interview
+                </h1>
+                <p class="text-muted step">(step 3 of 4)</p>
+                <p>Discover your OCEAN personality type by answering this survey.</p>
+            </div><!-- /.col -->
+            <div class="col-sm-8">
+                <div id="surveyContainer"></div>
+                <script>
+                    Survey.StylesManager.applyTheme("bootstrap");
+                    
+                    var myCss = {
+                        matrix: {
+                            root: "table table-striped"
+                        },
+                        navigationButton: "btn btn-primary",
+                        progressBar: "bar-green"
+                    };
+                    
+                    var surveyJSON = {pages:[
+                        {questions: [
+                            { type: "matrix", name: "Personality", title: "I am a person who ...", 
+                            isAllRowRequired: true,
+                            columns: [{ value: 1, text: "Strongly Disagree" }, 
+                            { value: 2, text: "Disagree" }, 
+                            { value: 3, text: "Neutral" }, 
+                            { value: 4, text: "Agree" }, 
+                            { value: 5, text: "Strongly Agree" }],
+                            rows: [
+                            { value: 1, text: "... is talkative" }, 
+                            { value: 2, text: "... tends to find faults with others" },
+                            { value: 3, text: "... does a thorough job" },
+                            { value: 4, text: "... is depressed, blue" },
+                            { value: 5, text: "... is original, comes up with new ideas" },
+                            { value: 6, text: "... is reserved" },
+                            { value: 7, text: "... is helpful and unselfish with others" },
+                            { value: 8, text: "... can be somewhat careless" },
+                            { value: 9, text: "... is relaxed, handles stress well." },
+                            { value: 10, text: "... is curious about many different things" },
+                            ]
+                        },
+                        ]},
+                        {questions: [
+                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            isAllRowRequired: true,
+                            columns: [{ value: 1, text: "Strongly Disagree" }, 
+                            { value: 2, text: "Disagree" }, 
+                            { value: 3, text: "Neutral" }, 
+                            { value: 4, text: "Agree" }, 
+                            { value: 5, text: "Strongly Agree" }],
+                            rows: [
+                            { value: 11, text: "... is full of energy" },
+                            { value: 12, text: "... starts quarrels with others" },
+                            { value: 13, text: "... is a reliable worker" },
+                            { value: 14, text: "... can be tense" },
+                            { value: 15, text: "... is ingenious, a deep thinker" },
+                            { value: 16, text: "... generates a lot of enthusiasm" },
+                            { value: 17, text: "... has a forgiving nature" },
+                            { value: 18, text: "... tends to be disorganized" },
+                            { value: 19, text: "... worries a lot" },
+                            { value: 20, text: "... has an active imagination" },
+                            ]
+                        },
+                        ]},
+                        {questions: [
+                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            isAllRowRequired: true,
+                            columns: [{ value: 1, text: "Strongly Disagree" }, 
+                            { value: 2, text: "Disagree" }, 
+                            { value: 3, text: "Neutral" }, 
+                            { value: 4, text: "Agree" }, 
+                            { value: 5, text: "Strongly Agree" }],
+                            rows: [
+                            { value: 21, text: "... tends to be quiet" },
+                            { value: 22, text: "... is generally trusting" },
+                            { value: 23, text: "... tends to be lazy" },
+                            { value: 24, text: "... is emotionally stable, not easily upset" },
+                            { value: 25, text: "... is inventive" },
+                            { value: 26, text: "... has an assertive personality" },
+                            { value: 27, text: "... can be cold and aloof" },
+                            { value: 28, text: "... perseveres until the task is finished" },
+                            { value: 29, text: "... can be moody" },
+                            { value: 30, text: "... values artistic, aesthetic experiences" },
+                            ]
+                        },
+                        ]},
+                        {questions: [
+                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            isAllRowRequired: true,
+                            columns: [{ value: 1, text: "Strongly Disagree" }, 
+                            { value: 2, text: "Disagree" }, 
+                            { value: 3, text: "Neutral" }, 
+                            { value: 4, text: "Agree" }, 
+                            { value: 5, text: "Strongly Agree" }],
+                            rows: [
+                            { value: 31, text: "... is sometimes shy, inhibited" },
+                            { value: 32, text: "... is considerate and kind to almost everyone" },
+                            { value: 33, text: "... does things efficiently" },
+                            { value: 34, text: "... remains calm in tense situations" },
+                            { value: 35, text: "... prefers work that is routine" },
+                            { value: 36, text: "... is outgoing, sociable" },
+                            { value: 37, text: "... is sometimes rude to others" },
+                            { value: 38, text: "... makes plans and follows through with them" },
+                            { value: 39, text: "... gets nervous easily" },
+                            { value: 40, text: "... likes to reflect, play with ideas" },
+                            ]
+                        },
+                        ]},
+                        {questions: [
+                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            isAllRowRequired: true,
+                            columns: [{ value: 1, text: "Strongly Disagree" }, 
+                            { value: 2, text: "Disagree" }, 
+                            { value: 3, text: "Neutral" }, 
+                            { value: 4, text: "Agree" }, 
+                            { value: 5, text: "Strongly Agree" }],
+                            rows: [
+                            { value: 41, text: "... has few artistic interests" },
+                            { value: 42, text: "... likes to cooperate with others" },
+                            { value: 43, text: "... is easily distracted" },
+                            { value: 44, text: "... is sophisticated in art, music, or literature" }
+                            ]
+                        },
+                        ]},
+                    ]};
+                    
+                    var survey = new Survey.Model(surveyJSON);
+                    survey.showProgressBar = 'top';
+
+                    function sendDataToServer(survey) {
+                        //send Ajax request to your web server.
+                        alert("The results are:" + JSON.stringify(survey.data));
+                    }
+                    
+                    $("#surveyContainer").Survey({
+                        model: survey,
+                        css: myCss,
+                        onComplete: sendDataToServer,
+                    });
+                    doOnCurrentPageChanged(survey);
+                </script>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+    
+</div>
+
+
+{% endblock app_content %}    

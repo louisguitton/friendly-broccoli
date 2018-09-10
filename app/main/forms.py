@@ -7,4 +7,4 @@ class ApplyForm(FlaskForm):
     name = TextField('Your Name', validators=[DataRequired(), Length(min=6, max=128)])
     location = TextField('Location', validators=[DataRequired(), Length(min=6, max=128)])
     linkedin_url = TextField('Linkedin', validators=[DataRequired(), Length(min=6, max=128)])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Next Step')

@@ -264,3 +264,10 @@ section#about h4 {
 .team-member p {
     margin-top: 0;
 }
+
+.bar-green {
+    background-color: #aec251;
+    color: #fff;
+    padding-left: 10px;
+    float: left;
+}
