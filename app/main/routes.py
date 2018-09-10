@@ -1,10 +1,10 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, session, request, send_from_directory, current_app
+from flask import render_template, flash, redirect, url_for, session, request, send_from_directory, current_app, jsonify
 from flask_login import current_user, login_required
 
 from app import db
 from app.main.forms import ApplyForm
-from app.models import Question, Submission
+from app.models import Question, Submission, PersonalitySchema
 from app.main import bp
 
 
@@ -82,9 +82,13 @@ def find_question():
 def get_personality():
     if request.method == 'POST':
         answers_json = request.get_json()['personality']
-        current_app.logger.info(answers_json)
         big_five = get_big_five(answers_json)
         current_app.logger.info(big_five)
+
+        sub = Submission.from_dict(session['submission'])
+        sub.personality = PersonalitySchema().dump(big_five).data
+        db.session.commit()
+        return jsonify(big_five)
         
     return render_template('survey.html')
 

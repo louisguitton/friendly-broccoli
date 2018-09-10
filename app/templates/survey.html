@@ -21,6 +21,8 @@
             </div><!-- /.col -->
             <div class="col-sm-8">
                 <div id="surveyContainer"></div>
+                <pre id="surveyResult"></pre>
+
                 <script>
                     Survey.StylesManager.applyTheme("bootstrap");
                     
@@ -144,20 +146,20 @@
 
                     function sendDataToServer(survey) {
                         var to_send = JSON.stringify(survey.data)
-                        console.log(to_send);
                         
-                        var result = $.ajax({
-                                        type: 'POST',
-                                        url: "{{ url_for('main.get_personality')}}",
-                                        contentType: 'application/json',
-                                        data: to_send,
-                                        success: function(req, err) {
-
-                                        },
-                                        error: function(req, err) {
-                                            alert(err);
-                                        }
-                                    });
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ url_for('main.get_personality')}}",
+                            contentType: 'application/json',
+                            data: to_send,
+                            success: function(req, err) {
+                                document.querySelector('#surveyResult')
+                                    .innerHTML = JSON.stringify(req, undefined, 2);
+                            },
+                            error: function(req, err) {
+                                alert(err);
+                            }
+                        });
                     }
                     
                     $("#surveyContainer").Survey({

@@ -105,6 +105,7 @@ class Submission(db.Model, MarshmallowMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     creation_date = db.Column(db.DateTime, default=datetime.utcnow)
     videos = db.relationship('Video', backref='submission', lazy='dynamic')
+    personality = db.Column(db.JSON)
 
     def __repr__(self):
         return '<Submission ({}, {})>'.format(self.user_id, self.creation_date)
@@ -114,6 +115,11 @@ class UserAgentSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ('platform', 'browser', 'version', 'language')
+
+class PersonalitySchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('extraversion', 'agreeableness', 'conscientiousness', 'neuroticism', 'openness')
 
 
 class BaseSchema(ma.ModelSchema):
