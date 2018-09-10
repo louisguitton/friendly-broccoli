@@ -61,6 +61,7 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
     from app.main import bp as main_bp
+    csrf.exempt(main_bp) # TODO: remove this short term fix
     app.register_blueprint(main_bp)
 
     from app.admin import init_admin, register_principal_identity_signal
