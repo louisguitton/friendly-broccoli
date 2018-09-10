@@ -16,6 +16,8 @@ def before_request():
 
 @bp.route('/')
 def index():
+    if current_app.config["BETA_MODE_ON"]:
+        flash("Welcome to our Beta. If you run into any trouble or find any bug, please leave me a message using the button in the bottom right.")
     return render_template('home.html')
 
 @bp.route('/robots.txt')

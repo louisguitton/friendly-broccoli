@@ -47,3 +47,5 @@ class Config(object):
     ALLOWED_EXTENSIONS = set(['webm', 'mp4'])
 
     GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
+
+    BETA_MODE_ON = True
