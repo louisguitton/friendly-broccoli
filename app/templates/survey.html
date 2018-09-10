@@ -22,7 +22,10 @@
             <div class="col-sm-8">
                 <div id="surveyContainer"></div>
                 <pre id="surveyResult"></pre>
-
+                <div style='display: none;' id="surveyExplanation">
+                    <img src="{{url_for('static', filename='img/ocean.jpe')}}" alt="OCEAN's interpretation">
+                </div>
+                
                 <script>
                     Survey.StylesManager.applyTheme("bootstrap");
                     
@@ -139,40 +142,41 @@
                             ]
                         },
                         ]},
-                    ]};
-                    
-                    var survey = new Survey.Model(surveyJSON);
-                    survey.showProgressBar = 'top';
-
-                    function sendDataToServer(survey) {
-                        var to_send = JSON.stringify(survey.data)
+                        ]};
                         
-                        $.ajax({
-                            type: 'POST',
-                            url: "{{ url_for('main.get_personality')}}",
-                            contentType: 'application/json',
-                            data: to_send,
-                            success: function(req, err) {
-                                document.querySelector('#surveyResult')
+                        var survey = new Survey.Model(surveyJSON);
+                        survey.showProgressBar = 'top';
+                        
+                        function sendDataToServer(survey) {
+                            var to_send = JSON.stringify(survey.data)
+                            
+                            $.ajax({
+                                type: 'POST',
+                                url: "{{ url_for('main.get_personality')}}",
+                                contentType: 'application/json',
+                                data: to_send,
+                                success: function(req, err) {
+                                    document.querySelector('#surveyResult')
                                     .innerHTML = JSON.stringify(req, undefined, 2);
-                            },
-                            error: function(req, err) {
-                                alert(err);
-                            }
+                                    $("#surveyExplanation").fadeIn();
+                                },
+                                error: function(req, err) {
+                                    alert(err);
+                                }
+                            });
+                        }
+                        
+                        $("#surveyContainer").Survey({
+                            model: survey,
+                            css: myCss,
+                            onComplete: sendDataToServer,
                         });
-                    }
-                    
-                    $("#surveyContainer").Survey({
-                        model: survey,
-                        css: myCss,
-                        onComplete: sendDataToServer,
-                    });
-                </script>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+                    </script>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+        
     </div>
     
-</div>
-
-
-{% endblock app_content %}    
+    
+    {% endblock app_content %}    
