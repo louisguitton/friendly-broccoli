@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, session, request, send_from_directory
+from flask import render_template, flash, redirect, url_for, session, request, send_from_directory, current_app
 from flask_login import current_user, login_required
 
 from app import db
@@ -78,7 +78,34 @@ def find_question():
         return render_template('video.html', questions=questions, video_settings=video_settings)
     return redirect(url_for('main.apply'))
 
-@bp.route('/personality')
+@bp.route('/personality', methods=['GET', 'POST'])
 def get_personality():
+    if request.method == 'POST':
+        answers_json = request.get_json()['personality']
+        current_app.logger.info(answers_json)
+        big_five = get_big_five(answers_json)
+        current_app.logger.info(big_five)
+        
     return render_template('survey.html')
 
+
+def get_big_five(answers):
+    scoring_instructions = {
+        "extraversion": ["1", "6R", "11", "16", "21R", "26", "31R", "36"],
+        "agreeableness": ["2R", "7", "12R", "17", "22", "27R", "32", "37R", "42"],
+        "conscientiousness": ["3", "8R", "13", "18R", "23R", "28", "33", "38", "43R"],
+        "neuroticism": ["4", "9R", "14", "19", "24R", "29", "34R", "39"],
+        "openness": ["5", "10", "15", "20", "25", "30", "35R", "40", "41R", "44"],
+    }
+
+    def f(instructions):
+        total = 0
+        for i in instructions:
+            if i.strip('R') in answers:
+                if i.endswith('R'):
+                    total += (6 - int(answers[i.strip('R')]))
+                else:
+                    total += int(answers[i])
+        return round(total / len(instructions), 2)
+
+    return {k: f(v) for k, v in scoring_instructions.items()}

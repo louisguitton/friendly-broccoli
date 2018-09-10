@@ -34,7 +34,7 @@
                     
                     var surveyJSON = {pages:[
                         {questions: [
-                            { type: "matrix", name: "Personality", title: "I am a person who ...", 
+                            { type: "matrix", name: "personality", title: "I am a person who ...",
                             isAllRowRequired: true,
                             columns: [{ value: 1, text: "Strongly Disagree" }, 
                             { value: 2, text: "Disagree" }, 
@@ -56,7 +56,7 @@
                         },
                         ]},
                         {questions: [
-                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            { type: "matrix", name: "personality", title: "I am a person who ...",
                             isAllRowRequired: true,
                             columns: [{ value: 1, text: "Strongly Disagree" }, 
                             { value: 2, text: "Disagree" }, 
@@ -78,7 +78,7 @@
                         },
                         ]},
                         {questions: [
-                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            { type: "matrix", name: "personality", title: "I am a person who ...",
                             isAllRowRequired: true,
                             columns: [{ value: 1, text: "Strongly Disagree" }, 
                             { value: 2, text: "Disagree" }, 
@@ -100,7 +100,7 @@
                         },
                         ]},
                         {questions: [
-                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            { type: "matrix", name: "personality", title: "I am a person who ...",
                             isAllRowRequired: true,
                             columns: [{ value: 1, text: "Strongly Disagree" }, 
                             { value: 2, text: "Disagree" }, 
@@ -122,7 +122,7 @@
                         },
                         ]},
                         {questions: [
-                            { type: "matrix", name: "Personality", title: "I am a person who ...",
+                            { type: "matrix", name: "personality", title: "I am a person who ...",
                             isAllRowRequired: true,
                             columns: [{ value: 1, text: "Strongly Disagree" }, 
                             { value: 2, text: "Disagree" }, 
@@ -143,8 +143,21 @@
                     survey.showProgressBar = 'top';
 
                     function sendDataToServer(survey) {
-                        //send Ajax request to your web server.
-                        alert("The results are:" + JSON.stringify(survey.data));
+                        var to_send = JSON.stringify(survey.data)
+                        console.log(to_send);
+                        
+                        var result = $.ajax({
+                                        type: 'POST',
+                                        url: "{{ url_for('main.get_personality')}}",
+                                        contentType: 'application/json',
+                                        data: to_send,
+                                        success: function(req, err) {
+
+                                        },
+                                        error: function(req, err) {
+                                            alert(err);
+                                        }
+                                    });
                     }
                     
                     $("#surveyContainer").Survey({
@@ -152,7 +165,6 @@
                         css: myCss,
                         onComplete: sendDataToServer,
                     });
-                    doOnCurrentPageChanged(survey);
                 </script>
             </div><!-- /.col -->
         </div><!-- /.row -->
