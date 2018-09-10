@@ -62,7 +62,8 @@ def apply():
 
 @bp.route('/questions')
 def find_question():
-    if session.get('submission') is not None:
+    current_submission = session.get('submission')
+    if current_submission is not None:
         video_settings = {
             'controls': True,
             'fluid': True,
@@ -75,7 +76,7 @@ def find_question():
             }
         }
         questions = Question.query.order_by("order_pos asc").all()
-        return render_template('video.html', questions=questions, video_settings=video_settings)
+        return render_template('video.html', questions=questions, video_settings=video_settings, submission=current_submission)
     return redirect(url_for('main.apply'))
 
 @bp.route('/personality', methods=['GET', 'POST'])

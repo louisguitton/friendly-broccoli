@@ -148,7 +148,8 @@
                                                 "{{ url_for('upload.enqueue_video') }}",
                                                 {
                                                     key: unique_name,
-                                                    question_id: {{ q.id }} 
+                                                    question_id: {{ q.id }},
+                                                    submission_id: {{ submission.id }}
                                                 },
                                                 function(resp){
                                                     console.log(resp);

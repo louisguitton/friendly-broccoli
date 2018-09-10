@@ -41,13 +41,14 @@ def get_signed_url():
 def enqueue_video():
     key = request.args.get('key', default=None, type=str)
     question_id = request.args.get('question_id', default=None, type=int)
+    submission_id = request.args.get('submission_id', default=None, type=int)
 
     v = Video(
         applicant=current_user._get_current_object(),
         question=Question.query.get(question_id),
         s3_key=key,
         user_agent=UserAgentSchema().dump(request.user_agent).data,
-        submission=Submission.from_dict(session['submission'])
+        submission=Submission.query.get(submission_id)
     )
     db.session.add(v)
     db.session.commit()
