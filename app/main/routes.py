@@ -31,7 +31,7 @@ def about():
 @bp.route('/interview', methods=['GET', 'POST'])
 @login_required
 def apply():
-    form = ApplyForm(obj=current_user)
+    form = ApplyForm(obj=current_user, meta={'csrf': False})
     if form.validate_on_submit():
         current_user.name = form.name.data
         current_user.location = form.location.data
