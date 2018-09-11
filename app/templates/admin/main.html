@@ -92,7 +92,13 @@ Admin | Personality Interview
                     <li><a href="{{ url_for('main.impressum') }}">Impressum</a></li>
                     {% if g.identity.provides %}
                     <li class="footer-menu-divider">⋅</li>
-                    <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+                    <li class="list-inline-item"><a href="{{ url_for('admin.index') }}">Admin</a></li>
+                    <li class="list-inline-item">
+                        <a href="https://manage.auth0.com/#/" target='blank'>Auth0</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://s3.console.aws.amazon.com/s3/buckets/applicant-tracking/?region=eu-central-1&tab=overview#" target='blank'>S3 Bucket</a>
+                    </li>
                     {% endif %}
                     <li class="footer-menu-divider">⋅</li>
                     {% if current_user.is_anonymous %}
